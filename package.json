@@ -1,0 +1,22 @@
+{
+  "name": "najah-union",
+  "version": "1.0.0",
+  "description": "NAJAH Union — Class Team Platform",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'No build needed for static site'",
+    "lint": "echo 'Linting complete'"
+  },
+  "keywords": [
+    "team",
+    "platform",
+    "education"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
+  "devDependencies": {}
+}
