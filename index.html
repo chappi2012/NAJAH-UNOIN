@@ -3,1272 +3,341 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NAJAH — Class Union</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<title>NAJAH Union</title>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0B1F3A;--gold:#C9A84C;--cream:#F7F5F0;--white:#fff;--muted:#6B7280;--border:#E5E7EB;--ok:#10B981;--bad:#EF4444;--red:#7C3AED;--rl:#ede9fe;--blue:#2563EB;--bl:#DBEAFE;--green:#16A34A;--gl:#DCFCE7;--pur:#6b21a8;--purl:#f3e8ff;--purd:#3b0764}
-body.dark{--cream:#0f172a;--white:#1e293b;--border:#334155;--muted:#94a3b8;background:#0f172a;color:#e2e8f0}body.dark::before{background:linear-gradient(135deg,#0f172a,#1a0533,#0c2340,#0f172a);animation:none}
-body.dark nav{background:#020617}body.dark .tab-bar{background:#1e293b}
-body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--navy);min-height:100vh;transition:background .3s,color .3s}
-body::before{content:'';position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,#f8f0ff 0%,#e8f4ff 20%,#fff8e8 40%,#e8fff0 60%,#f0e8ff 80%,#ffe8f0 100%);background-size:400% 400%;animation:bgShift 12s ease infinite;}
-@keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-nav{position:sticky;top:0;z-index:300;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 1.2rem;height:54px;box-shadow:0 2px 12px rgba(0,0,0,.3)}
-.logo{font-family:'Syne',sans-serif;font-size:1.3rem;color:var(--gold);white-space:nowrap}.logo span{color:#fff}
-.hbg{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:.25rem}
-.hbg span{width:22px;height:2px;background:#fff;border-radius:2px;display:block;transition:.3s}
-.nl{display:flex;gap:0;list-style:none;flex-wrap:wrap}
-.nl a{color:rgba(255,255,255,.65);text-decoration:none;font-size:.74rem;font-weight:500;padding:.32rem .58rem;border-radius:6px;transition:.2s;white-space:nowrap}
-.nl a:hover,.nl a.active{color:var(--gold);background:rgba(201,168,76,.12)}
-.tab-bar{background:linear-gradient(90deg,#f8f0ff,#e8f4ff,#fff8e8,#e8fff0);border-bottom:2px solid var(--gold);display:flex;overflow-x:auto;padding:0 .8rem;position:sticky;top:54px;z-index:200;scrollbar-width:none}
-.tab-bar::-webkit-scrollbar{display:none}
-.tb{padding:.72rem .85rem;font-size:.76rem;font-weight:600;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:.2s}
-.tb.active,.tb:hover{color:var(--navy);border-bottom-color:var(--gold)}
-.hero{background:linear-gradient(135deg,#0B1F3A 0%,#3b0764 30%,#14335A 60%,#1a6b3a 100%);color:#fff;padding:3rem 1.5rem 2.2rem;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'NAJAH';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Syne',sans-serif;font-size:18vw;font-weight:800;color:rgba(255,255,255,.03);pointer-events:none;white-space:nowrap}
-.heyebrow{font-size:.7rem;font-weight:600;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:.55rem}
-.hero h1{font-family:'Syne',sans-serif;font-size:clamp(1.7rem,5vw,3.3rem);font-weight:800;margin-bottom:.55rem}.hero h1 em{color:var(--gold);font-style:normal}
-.hero p{color:rgba(255,255,255,.58);max-width:400px;margin:0 auto 1.6rem;font-size:.88rem;line-height:1.7}
-.hstats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
-.hstat .num{font-family:'Syne',sans-serif;font-size:1.55rem;font-weight:800;color:var(--gold)}
-.hstat .lbl{font-size:.62rem;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.1em}
-.panel{display:none;max-width:1100px;margin:0 auto;padding:1.8rem 1.2rem;position:relative}
-.panel.active{display:block}
-.sh{margin-bottom:1.6rem}.sh h2{font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:800;background:linear-gradient(90deg,#7C3AED,#2563EB,#16A34A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.sh p{color:var(--muted);font-size:.84rem;margin-top:.25rem}
-.gb{width:30px;height:3px;background:linear-gradient(90deg,#7C3AED,var(--gold),#16A34A);border-radius:2px;margin-bottom:.45rem}
-.g3{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.95rem}
-.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1.05rem}
-.bx{background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(8px)}
-.bx:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.08)}
-.bp{padding:1.05rem}
-.badge{display:inline-block;font-size:.66rem;font-weight:700;padding:.17rem .58rem;border-radius:20px;text-transform:uppercase}
-.br{background:#EDE9FE;color:#7C3AED}.bb{background:var(--bl);color:var(--blue)}.bg{background:var(--gl);color:var(--green)}
-.av{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;color:#fff;flex-shrink:0}
-.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.22rem}
-/* TEAMS */
-.trow{display:grid;grid-template-columns:repeat(3,1fr);gap:.95rem;margin-bottom:1.6rem}
-.tc{border-radius:14px;padding:1.1rem;text-align:center;border:2px solid transparent}
-.tc.r{background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-color:#7C3AED}.tc.b{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#2563EB}.tc.g{background:linear-gradient(135deg,#dcfce7,#bbf7d0);border-color:#16A34A}
-.tn{font-family:'Syne',sans-serif;font-weight:800;font-size:.93rem}
-.tc.r .tn{color:#7C3AED}.tc.b .tn{color:var(--blue)}.tc.g .tn{color:var(--green)}
-.tsn{font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;margin:.18rem 0}
-.tmc{font-size:.68rem;color:var(--muted)}
-.tbar{height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;margin-top:.45rem}
-.tbf{height:100%;border-radius:3px;transition:width .8s}
-/* LB */
-.lbw{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.lbh{display:grid;grid-template-columns:40px 1fr 75px 75px 75px;gap:.65rem;padding:.55rem 1rem;background:var(--navy);color:rgba(255,255,255,.5);font-size:.64rem;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
-.lbr{display:grid;grid-template-columns:40px 1fr 75px 75px 75px;align-items:center;gap:.65rem;padding:.7rem 1rem;border-bottom:1px solid var(--border);transition:background .15s}
-.lbr:last-child{border-bottom:none}.lbr:hover{background:var(--cream)}
-.lbr.r1{background:linear-gradient(90deg,rgba(201,168,76,.1),transparent)}
-.lbr.r2{background:linear-gradient(90deg,rgba(156,163,175,.06),transparent)}
-.lbr.r3{background:linear-gradient(90deg,rgba(180,120,60,.05),transparent)}
-.lbrank{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:800;color:var(--muted);text-align:center}
-.r1 .lbrank{color:var(--gold)}.r2 .lbrank{color:#9CA3AF}.r3 .lbrank{color:#B47840}
-.lbn{font-weight:600;font-size:.86rem}.lbs{font-size:.68rem;color:var(--muted)}
-.lbp{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800}
-/* MEMBER CARD */
-.mc{background:rgba(255,255,255,.9);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;cursor:pointer;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(6px)}
-.mc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.08)}
-.mcn{font-weight:700;font-size:.86rem;margin:.6rem 0 .18rem}.mcr{font-size:.7rem;color:var(--muted);margin-bottom:.42rem}
-/* MODAL */
-.mo{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem}
-.mo.open{display:flex}
-.md{background:var(--white);border-radius:20px;max-width:440px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.18)}
-.mdh{background:linear-gradient(135deg,var(--navy),#14335A);padding:1.6rem;text-align:center;position:relative}
-.mcl{position:absolute;top:.7rem;right:.7rem;background:rgba(255,255,255,.15);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center}
-.mcl:hover{background:rgba(255,255,255,.25)}
-.mav{width:64px;height:64px;border-radius:50%;font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;display:flex;align-items:center;justify-content:center;margin:0 auto .7rem;border:3px solid rgba(255,255,255,.3)}
-.mdn{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:#fff}
-.mdr{font-size:.74rem;color:rgba(255,255,255,.6);margin-top:.12rem}
-.mdb{padding:1.1rem}
-.pr{display:flex;justify-content:space-between;padding:.48rem 0;border-bottom:1px solid var(--border);font-size:.82rem}
-.pr:last-child{border-bottom:none}.pr span:first-child{color:var(--muted);font-size:.74rem}.pr span:last-child{font-weight:600}
-.pbio{background:var(--cream);border-radius:10px;padding:.75rem;font-size:.79rem;color:var(--muted);line-height:1.6;margin:.65rem 0}
-.ebtn{width:100%;padding:.6rem;background:var(--navy);color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:.82rem;cursor:pointer;margin-top:.6rem}
-.ebtn:hover{background:#14335A}
-.pef{display:none}.pef.open{display:block}
-.pfl{margin-bottom:.55rem}
-.pfl label{display:block;font-size:.72rem;font-weight:600;margin-bottom:.2rem;color:var(--muted)}
-.pfl input,.pfl textarea{width:100%;padding:.5rem .75rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.8rem;outline:none;background:var(--white);color:var(--navy)}
-.pfl input:focus,.pfl textarea:focus{border-color:var(--gold)}
-.sbp{width:100%;padding:.55rem;background:var(--ok);color:#fff;border:none;border-radius:8px;font-weight:600;font-size:.8rem;cursor:pointer;margin-top:.42rem}
-.achl{display:flex;flex-wrap:wrap;gap:.32rem;margin-top:.45rem}
-.ach{background:var(--gold);color:var(--navy);font-size:.64rem;font-weight:700;padding:.16rem .52rem;border-radius:20px}
-/* CANDIDATES */
-.cnd{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.cndh{background:var(--navy);padding:1.05rem;display:flex;align-items:center;gap:.75rem}
-.cndn{font-weight:700;color:#fff;font-size:.88rem}.cndp{font-size:.7rem;color:var(--gold);margin-top:.1rem}.cndt{font-size:.66rem;color:rgba(255,255,255,.4);margin-top:.08rem}
-.vb{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin:.52rem 0}
-.vbf{height:100%;border-radius:3px;transition:width .6s}
-.vm{display:flex;justify-content:space-between;font-size:.69rem;color:var(--muted);margin-bottom:.52rem}
-.bvote{width:100%;padding:.55rem;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:.77rem;cursor:pointer;background:var(--navy);color:#fff;transition:.2s}
-.bvote:hover{background:#14335A}.bvote.voted{background:var(--ok)}.bvote:disabled{opacity:.6;cursor:not-allowed}
-/* EVENTS */
-.ev{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.95rem 1.05rem;display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:.85rem;margin-bottom:.7rem}
-.ev:hover{box-shadow:0 5px 18px rgba(0,0,0,.06)}
-.evd{background:var(--navy);border-radius:8px;text-align:center;padding:.38rem .18rem}
-.evday{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;line-height:1;color:var(--gold)}
-.evmon{font-size:.56rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.55)}
-.evt{font-weight:700;font-size:.86rem;margin-bottom:.14rem}.evm{font-size:.71rem;color:var(--muted)}
-.etag{font-size:.65rem;font-weight:700;padding:.18rem .58rem;border-radius:20px;text-transform:uppercase;white-space:nowrap}
-.tu{background:rgba(201,168,76,.15);color:#9A7010}.tt{background:rgba(16,185,129,.12);color:var(--ok)}.tp{background:var(--cream);color:var(--muted)}
-/* CHAT */
-.ctabs{display:flex;gap:.38rem;margin-bottom:.95rem;flex-wrap:wrap}
-.cbtn{padding:.38rem .9rem;border-radius:20px;border:2px solid transparent;font-size:.76rem;font-weight:700;cursor:pointer;transition:.2s;background:var(--white)}
-.cbtn.all{border-color:var(--navy);color:var(--navy)}.cbtn.active.all{background:var(--navy);color:#fff}
-.cbtn.red{border-color:#7C3AED;color:#7C3AED}.cbtn.active.red{background:#7C3AED;color:#fff}
-.cbtn.blue{border-color:var(--blue);color:var(--blue)}.cbtn.active.blue{background:var(--blue);color:#fff}
-.cbtn.green{border-color:var(--green);color:var(--green)}.cbtn.active.green{background:var(--green);color:#fff}
-.cbox{background:var(--white);border:1px solid var(--border);border-radius:14px;min-height:250px;max-height:340px;overflow-y:auto;padding:.9rem;display:flex;flex-direction:column;gap:.55rem}
-.cmsg{display:flex;gap:.55rem;align-items:flex-start}
-.cmeta{font-size:.65rem;color:var(--muted);margin-bottom:.1rem}.cmeta strong{color:var(--navy);font-size:.7rem}
-.cbub{background:var(--cream);border-radius:0 10px 10px 10px;padding:.48rem .75rem;font-size:.79rem;line-height:1.5;max-width:440px}
-.crow{display:flex;gap:.52rem;margin-top:.62rem}
-.csel,.cinp{padding:.55rem .8rem;border:1px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.79rem;outline:none;background:var(--white);color:var(--navy)}
-.cinp{flex:1}.csel{min-width:125px}.cinp:focus,.csel:focus{border-color:var(--gold)}
-.bsend{padding:.55rem 1.05rem;background:var(--navy);color:#fff;border:none;border-radius:10px;font-weight:600;font-size:.79rem;cursor:pointer}.bsend:hover{background:#14335A}
-/* GALLERY */
-.gup{border:2px dashed var(--border);border-radius:12px;padding:1.5rem;text-align:center;color:var(--muted);cursor:pointer;margin-bottom:1.05rem}
-.gup:hover{border-color:var(--gold);color:var(--navy)}
-.gg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.85rem}
-.gi{background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s}
-.gi:hover{transform:scale(1.03)}
-.gt{width:100%;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:2.6rem;background:linear-gradient(135deg,var(--cream),var(--border))}
-.gc{padding:.46rem .6rem;font-size:.72rem;font-weight:600}.gc span{display:block;font-size:.65rem;color:var(--muted);font-weight:400}
-/* ARTS FEST */
-.afh{background:linear-gradient(135deg,#1a0533,#3b0764,#6b21a8);border-radius:16px;padding:2rem 1.4rem;text-align:center;margin-bottom:1.6rem;position:relative;overflow:hidden}
-.afh h2{font-family:'Syne',sans-serif;font-size:clamp(1.3rem,4vw,2.2rem);font-weight:800;color:#fff;margin-bottom:.32rem}
-.afh h2 em{color:#f0abfc;font-style:normal}.afh p{color:rgba(255,255,255,.58);font-size:.82rem;max-width:360px;margin:0 auto 1.1rem}
-.afst{display:flex;justify-content:center;gap:1.65rem;flex-wrap:wrap}
-.afst .num{font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:800;color:#f0abfc}
-.afst .lbl{font-size:.61rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.1em}
-.stabs{display:flex;gap:.18rem;margin-bottom:1.3rem;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.22rem;overflow-x:auto}
-.stab{flex:1;padding:.46rem .52rem;border:none;background:none;border-radius:7px;font-family:'Inter',sans-serif;font-size:.73rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;white-space:nowrap;text-align:center}
-.stab.af{background:var(--pur);color:#fff;box-shadow:0 2px 8px rgba(107,33,168,.3)}
-.stab.sp{background:#1a6b3a;color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.3)}
-.sp2{display:none}.sp2.on{display:block}
-.afcats{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1.1rem}
-.afcb{padding:.36rem .78rem;border-radius:20px;border:2px solid var(--border);background:var(--white);font-size:.73rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;white-space:nowrap}
-.afcb.active,.afcb:hover{background:var(--pur);border-color:var(--pur);color:#fff}
-.afpc{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s}
-.afpc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(107,33,168,.1)}
-.afph{background:linear-gradient(135deg,#3b0764,#6b21a8);padding:1rem;text-align:center}
-.afpa{width:46px;height:46px;border-radius:50%;background:#f0abfc;color:#3b0764;font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto .46rem}
-.afpn{color:#fff;font-weight:700;font-size:.85rem}.afpc2{color:#f0abfc;font-size:.68rem;margin-top:.1rem}
-.afvb{width:100%;padding:.5rem;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:.75rem;cursor:pointer;background:var(--pur);color:#fff;transition:.2s;margin-top:.55rem}
-.afvb:hover{background:#7c3aed}.afvb.voted{background:var(--ok)}.afvb:disabled{opacity:.6;cursor:not-allowed}
-.afsc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem;display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:.8rem;margin-bottom:.6rem}
-.aftm{background:var(--purd);color:#f0abfc;border-radius:8px;text-align:center;padding:.4rem .15rem;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem}
-.afst2{font-weight:700;font-size:.84rem}.afsm{font-size:.68rem;color:var(--muted);margin-top:.1rem}
-.afstag{font-size:.66rem;font-weight:600;padding:.17rem .55rem;border-radius:20px;background:var(--purl);color:var(--pur);white-space:nowrap}
-.jc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.9rem;display:flex;align-items:center;gap:.7rem}
-.jav{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#3b0764,#6b21a8);color:#f0abfc;font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.jn{font-weight:700;font-size:.84rem}.js2{font-size:.7rem;color:var(--muted);margin-top:.08rem}
-.scw{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.sch{display:grid;grid-template-columns:1fr 1.4fr repeat(4,.72fr);gap:.38rem;padding:.5rem .9rem;background:#3b0764;color:rgba(255,255,255,.52);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.scr{display:grid;grid-template-columns:1fr 1.4fr repeat(4,.72fr);gap:.38rem;padding:.6rem .9rem;border-bottom:1px solid var(--border);align-items:center;font-size:.78rem}
-.scr:last-child{border-bottom:none}.scr:hover{background:var(--cream)}
-.sci{width:100%;padding:.25rem .3rem;border:1px solid var(--border);border-radius:6px;font-size:.72rem;text-align:center;outline:none;background:var(--white);color:var(--navy)}.sci:focus{border-color:var(--pur)}
-.aftot{font-family:'Syne',sans-serif;font-weight:800;color:var(--pur)}
-.areg{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.3rem;max-width:480px}
-.areg h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.82rem;color:#3b0764}
-.af,.sf{margin-bottom:.6rem}
-.af label,.sf label{display:block;font-size:.72rem;font-weight:600;margin-bottom:.2rem;color:var(--navy)}
-.af input,.af select,.af textarea,.sf input,.sf select{width:100%;padding:.5rem .75rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.8rem;outline:none;background:var(--white);color:var(--navy)}
-.af input:focus,.af select:focus,.af textarea:focus,.sf input:focus,.sf select:focus{border-color:var(--pur)}
-.af textarea{resize:vertical;min-height:60px}
-.baf{width:100%;padding:.6rem;background:var(--pur);color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:.35rem}
-.baf:hover{background:#7c3aed}
-/* SPORTS */
-.sph{background:linear-gradient(135deg,#0c2340,#0e4d2d,#1a6b3a);border-radius:16px;padding:2rem 1.4rem;text-align:center;margin-bottom:1.6rem}
-.sph h2{font-family:'Syne',sans-serif;font-size:clamp(1.3rem,4vw,2.2rem);font-weight:800;color:#fff;margin-bottom:.32rem}
-.sph h2 em{color:#86efac;font-style:normal}.sph p{color:rgba(255,255,255,.58);font-size:.82rem;max-width:360px;margin:0 auto 1.1rem}
-.spst{display:flex;justify-content:center;gap:1.65rem;flex-wrap:wrap}
-.spst .num{font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:800;color:#86efac}
-.spst .lbl{font-size:.61rem;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.1em}
-.sptabs{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1.1rem}
-.sptb{padding:.36rem .78rem;border-radius:20px;border:2px solid var(--border);background:var(--white);font-size:.73rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s;white-space:nowrap}
-.sptb.active,.sptb:hover{background:#1a6b3a;border-color:#1a6b3a;color:#fff}
-.mc2{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:.95rem;margin-bottom:.72rem}
-.mts{display:flex;align-items:center;justify-content:space-between;margin-bottom:.65rem}
-.mt{text-align:center;flex:1}.mtn{font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem}
-.msco{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;padding:0 1rem;text-align:center}
-.msco input{width:48px;font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;text-align:center;border:2px solid var(--border);border-radius:8px;outline:none;background:var(--white);color:var(--navy);padding:.15rem}
-.msco input:focus{border-color:#1a6b3a}
-.vsd{font-size:.7rem;font-weight:700;color:var(--muted);display:block;margin:.1rem 0}
-.mmeta{font-size:.71rem;color:var(--muted);text-align:center;margin-top:.45rem}
-.mstag{display:inline-block;font-size:.64rem;font-weight:700;padding:.15rem .55rem;border-radius:20px}
-.mlive{background:rgba(124,58,237,.12);color:#7C3AED}.mup{background:rgba(201,168,76,.12);color:#9A7010}.mdo{background:var(--cream);color:var(--muted)}
-.spstd{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden}
-.sph2{display:grid;grid-template-columns:30px 1fr repeat(5,46px);gap:.38rem;padding:.5rem .9rem;background:#0e4d2d;color:rgba(255,255,255,.52);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.spr{display:grid;grid-template-columns:30px 1fr repeat(5,46px);gap:.38rem;padding:.6rem .9rem;border-bottom:1px solid var(--border);align-items:center;font-size:.8rem}
-.spr:last-child{border-bottom:none}.spr:hover{background:var(--cream)}
-.sppts{font-family:'Syne',sans-serif;font-weight:800;color:#1a6b3a;text-align:center}
-.sreg{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.3rem;max-width:480px}
-.sreg h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;margin-bottom:.82rem;color:#0e4d2d}
-.bsp{width:100%;padding:.6rem;background:#1a6b3a;color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;margin-top:.35rem}.bsp:hover{background:#15803d}
-/* SETTINGS */
-.setg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.05rem}
-.setc{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1.15rem}
-.setc h3{font-family:'Syne',sans-serif;font-size:.93rem;font-weight:800;margin-bottom:.9rem}
-.setr{display:flex;align-items:center;justify-content:space-between;padding:.48rem 0;border-bottom:1px solid var(--border);gap:.65rem}.setr:last-child{border-bottom:none}
-.setl{font-size:.82rem;font-weight:500}.setd{font-size:.68rem;color:var(--muted);margin-top:.07rem}
-.tog{position:relative;width:38px;height:21px;flex-shrink:0}
-.tog input{opacity:0;width:0;height:0}
-.tsl{position:absolute;inset:0;background:var(--border);border-radius:21px;cursor:pointer;transition:.3s}
-.tsl::before{content:'';position:absolute;width:15px;height:15px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.3s}
-.tog input:checked+.tsl{background:var(--gold)}.tog input:checked+.tsl::before{transform:translateX(17px)}
-.setinp{padding:.42rem .65rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.79rem;outline:none;background:var(--white);color:var(--navy);width:100%}
-.setinp:focus{border-color:var(--gold)}
-.bss{padding:.48rem .9rem;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:.77rem;font-weight:600;cursor:pointer;margin-top:.55rem;width:100%}.bss:hover{background:#14335A}
-.lgrp{display:flex;gap:.35rem}.lbtn{flex:1;padding:.42rem;border:2px solid var(--border);border-radius:8px;font-size:.77rem;font-weight:600;cursor:pointer;background:var(--white);color:var(--muted);transition:.2s;text-align:center}
-.lbtn.active{border-color:var(--gold);background:var(--gold);color:var(--navy)}
-.setf{margin-bottom:.58rem}.setf label{display:block;font-size:.72rem;font-weight:600;margin-bottom:.2rem;color:var(--navy)}
-/* ADMIN */
-.lo{position:absolute;inset:0;background:var(--cream);display:flex;align-items:center;justify-content:center;z-index:10;min-height:400px}
-#panel-admin{position:relative}
-.lb2{background:var(--white);border:1px solid var(--border);border-radius:20px;padding:2.1rem 1.65rem;text-align:center;width:100%;max-width:320px;box-shadow:0 20px 60px rgba(0,0,0,.1)}
-.lb2 h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:.25rem}.lb2 p{font-size:.77rem;color:var(--muted);margin-bottom:1.15rem}
-.linp{width:100%;padding:.65rem .9rem;border:2px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.92rem;text-align:center;letter-spacing:.2em;outline:none;background:var(--white);color:var(--navy);margin-bottom:.6rem}
-.linp:focus{border-color:var(--gold)}.linp.err{border-color:var(--bad);animation:shk .3s}
-.bul{width:100%;padding:.65rem;background:var(--navy);color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer}.bul:hover{background:#14335A}
-.lerr{color:var(--bad);font-size:.72rem;margin-top:.35rem;min-height:.9rem}.lhint{font-size:.67rem;color:var(--muted);margin-top:.8rem}
-@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.aw{background:rgba(201,168,76,.1);border:1px solid var(--gold);border-radius:10px;padding:.78rem 1rem;margin-bottom:1.1rem;font-size:.77rem;color:#7A6020;display:flex;justify-content:space-between;align-items:center}
-.admsec{display:grid;grid-template-columns:repeat(auto-fill,minmax(278px,1fr));gap:1.05rem}
-.ac{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:1rem}
-.ac h3{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;margin-bottom:.8rem}
-.af2{display:flex;flex-direction:column;gap:.46rem}
-.ar{display:flex;gap:.36rem;flex-wrap:wrap}
-.ai,.as{flex:1;min-width:85px;padding:.46rem .65rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.77rem;outline:none;background:var(--white);color:var(--navy)}.ai:focus,.as:focus{border-color:var(--gold)}
-.badd{padding:.46rem .8rem;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap}.badd:hover{background:#14335A}
-.al{margin-top:.6rem;display:flex;flex-direction:column;gap:.3rem;max-height:170px;overflow-y:auto}
-.ai2{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;padding:.36rem .55rem;background:var(--cream);border-radius:6px}
-.bdel{background:none;border:none;color:var(--bad);cursor:pointer;font-size:.85rem;padding:0 .16rem}.bdel:hover{opacity:.7}
-.ptsl{display:flex;flex-direction:column;gap:.42rem;max-height:208px;overflow-y:auto}
-.ptsi{display:flex;align-items:center;gap:.52rem;padding:.4rem .55rem;background:var(--cream);border-radius:8px}
-.ptsn{flex:1;font-size:.77rem;font-weight:600}
-.ptsin{width:62px;padding:.3rem .42rem;border:1px solid var(--border);border-radius:6px;font-size:.77rem;text-align:center;outline:none;background:var(--white);color:var(--navy)}.ptsin:focus{border-color:var(--gold)}
-.bptsv{padding:.27rem .58rem;background:var(--ok);color:#fff;border:none;border-radius:6px;font-size:.7rem;font-weight:600;cursor:pointer}
-/* SEARCH */
-.sr{display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap}
-.si{flex:1;min-width:150px;padding:.48rem .8rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.79rem;background:var(--white);color:var(--navy);outline:none}.si:focus{border-color:var(--gold)}
-.fb{padding:.43rem .78rem;border:1px solid var(--border);border-radius:8px;background:var(--white);font-size:.73rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.15s}
-.fb.active,.fb:hover{border-color:var(--navy);color:var(--navy);background:var(--cream)}
-footer{background:linear-gradient(135deg,#0B1F3A,#3b0764,#0e4d2d);color:rgba(255,255,255,.5);text-align:center;padding:1.4rem;font-size:.74rem;margin-top:3rem}
-footer strong{color:var(--gold)}
-@media(max-width:640px){
-  .lbh,.lbr{grid-template-columns:34px 1fr 58px}.lbr>*:nth-child(4),.lbr>*:nth-child(5){display:none}
-  .ev{grid-template-columns:44px 1fr}.etag{display:none}
-  .trow{grid-template-columns:1fr}
-  .hbg{display:flex}
-  .nl{display:none;position:absolute;top:54px;left:0;right:0;background:var(--navy);flex-direction:column;padding:.65rem;gap:.1rem;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.3)}
-  .nl.open{display:flex}.nl a{padding:.52rem .82rem}
-  .afsc{grid-template-columns:48px 1fr}.afsc>*:last-child{display:none}
-  .sch,.scr{grid-template-columns:1fr 1.3fr repeat(4,.58fr);font-size:.66rem;padding:.36rem .55rem}
-  .sph2,.spr{grid-template-columns:26px 1fr repeat(5,36px);font-size:.7rem;padding:.36rem .55rem}
-}
+:root{--dark:#0F1219;--card:#1a1f2e;--input:#252c3d;--red:#FF6B6B;--cyan:#4ECDC4;--gold:#FFE66D;--text:#E8E8E8;--muted:#A8A8A8}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#0F1219;color:var(--text);font-family:Arial,sans-serif}
+body{display:flex;align-items:center;justify-content:center;padding:20px}
 
-/* ── REGISTER & PENDING ── */
-.reg-wrap{max-width:520px;margin:0 auto}
-.reg-hero{background:linear-gradient(135deg,var(--navy),#1a4070);border-radius:16px;padding:2rem 1.5rem;text-align:center;margin-bottom:1.75rem;color:#fff}
-.reg-hero h2{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;margin-bottom:.35rem}.reg-hero h2 em{color:var(--gold);font-style:normal}
-.reg-hero p{color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.3rem}
-.reg-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:1.25rem}
-.reg-card h3{font-family:'Syne',sans-serif;font-size:1.05rem;font-weight:800;margin-bottom:1rem;color:var(--navy);display:flex;align-items:center;gap:.4rem}
-.reg-field{margin-bottom:.75rem}
-.reg-field label{display:block;font-size:.76rem;font-weight:600;margin-bottom:.28rem;color:var(--muted)}
-.reg-field input,.reg-field select,.reg-field textarea{width:100%;padding:.6rem .85rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Inter',sans-serif;font-size:.88rem;outline:none;background:var(--white);color:var(--navy);transition:border-color .2s}
-.reg-field input:focus,.reg-field select:focus,.reg-field textarea:focus{border-color:var(--gold)}
-.reg-field textarea{resize:vertical;min-height:70px}
-.btn-reg{width:100%;padding:.75rem;background:var(--navy);color:#fff;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:background .2s;margin-top:.4rem}
-.btn-reg:hover{background:#14335A}
-.reg-msg{text-align:center;font-size:.82rem;margin-top:.75rem;padding:.65rem;border-radius:10px;display:none}
-.reg-msg.ok{background:rgba(16,185,129,.1);color:var(--ok);display:block}
-.reg-msg.err{background:rgba(239,68,68,.1);color:var(--bad);display:block}
-.reg-steps{display:flex;gap:.6rem;margin-bottom:1.5rem}
-.reg-step{flex:1;background:var(--white);border:1px solid var(--border);border-radius:10px;padding:.75rem;text-align:center}
-.reg-step .step-num{width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--gold);font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;margin:0 auto .4rem}
-.reg-step .step-lbl{font-size:.72rem;font-weight:600;color:var(--muted)}
-.pend-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.85rem;margin-bottom:.65rem}
-.pend-av{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;color:#fff;flex-shrink:0}
-.pend-name{font-weight:700;font-size:.88rem}.pend-meta{font-size:.72rem;color:var(--muted);margin-top:.12rem}
-.pend-actions{display:flex;gap:.45rem;margin-left:auto}
-.btn-approve{padding:.38rem .82rem;background:var(--ok);color:#fff;border:none;border-radius:8px;font-size:.76rem;font-weight:700;cursor:pointer}
-.btn-reject{padding:.38rem .82rem;background:var(--bad);color:#fff;border:none;border-radius:8px;font-size:.76rem;font-weight:700;cursor:pointer}
-.pending-badge{background:rgba(201,168,76,.18);color:#9A7010;font-size:.64rem;font-weight:700;padding:.18rem .55rem;border-radius:20px;text-transform:uppercase;margin-left:.4rem}
-.empty-pend{text-align:center;color:var(--muted);font-size:.84rem;padding:2rem;background:var(--white);border:1px solid var(--border);border-radius:12px}
+/* LOGIN SCREEN */
+#loginScreen{position:fixed;inset:0;background:linear-gradient(135deg,#0F1219,#1a0033);display:flex;align-items:center;justify-content:center;z-index:1000}
+#loginScreen.hidden{display:none}
+.login-box{background:var(--card);padding:40px;border-radius:20px;width:100%;max-width:400px;border:2px solid var(--cyan)}
+.login-box h1{background:linear-gradient(135deg,var(--red),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:30px;font-size:2em;text-align:center}
+.login-field{margin-bottom:20px}
+.login-field label{display:block;margin-bottom:8px;color:var(--cyan);font-weight:bold}
+.login-field input{width:100%;padding:12px;background:var(--input);border:2px solid var(--cyan);color:var(--text);border-radius:8px;font-size:14px}
+.login-btn{width:100%;padding:12px;background:linear-gradient(135deg,var(--red),var(--gold));color:#000;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:20px;font-size:16px}
+.login-btn:hover{opacity:0.9}
+.login-error{color:var(--red);margin-top:15px;text-align:center;font-weight:bold;display:none}
+.login-error.show{display:block}
+
+/* HEADER */
+header{background:linear-gradient(90deg,var(--card),#252c3d);padding:20px;border-bottom:2px solid var(--cyan);display:flex;justify-content:space-between;align-items:center}
+header h1{background:linear-gradient(135deg,var(--red),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0}
+.nav-buttons{display:flex;gap:15px}
+.nav-btn{padding:10px 20px;background:var(--cyan);color:#000;border:none;border-radius:6px;cursor:pointer;font-weight:bold}
+.nav-btn.active{background:var(--red)}
+.logout-btn{padding:8px 15px;background:var(--red);color:#fff;border:none;border-radius:6px;cursor:pointer;font-weight:bold}
+.user-info{color:var(--cyan);font-weight:bold}
+
+/* MAIN CONTENT */
+#app{display:none}
+#app.show{display:block}
+.content{max-width:1200px;margin:20px auto;padding:0 20px}
+.panel{display:none;margin-bottom:30px}
+.panel.active{display:block}
+
+/* SECTIONS */
+.section{background:var(--card);border:2px solid var(--cyan);border-radius:15px;padding:25px;margin-bottom:20px}
+.section h2{color:var(--gold);margin-bottom:20px;font-size:1.5em}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-bottom:20px}
+.team-card{background:linear-gradient(135deg,var(--red),var(--gold));color:#000;padding:20px;border-radius:10px;text-align:center;font-weight:bold;cursor:pointer}
+.team-name{font-size:1.1em;margin:10px 0}
+.team-emoji{font-size:2em;margin-bottom:10px}
+
+/* LEADERBOARD */
+.leaderboard{background:var(--input);border-radius:10px;overflow:hidden}
+.lb-row{padding:15px;border-bottom:1px solid rgba(78,205,196,0.2);display:flex;justify-content:space-between;align-items:center}
+.lb-row:last-child{border-bottom:none}
+.lb-rank{color:var(--gold);font-weight:bold;font-size:1.2em;min-width:40px}
+.lb-name{flex:1;margin-left:15px;color:var(--text)}
+.lb-points{color:var(--cyan);font-weight:bold}
+
+/* TEAM EDITOR */
+.team-editor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:15px;margin:20px 0}
+.team-editor-card{background:var(--input);border:2px solid var(--cyan);padding:15px;border-radius:10px}
+.team-editor-card input{width:100%;padding:10px;margin-bottom:10px;background:var(--card);color:var(--text);border:1px solid var(--cyan);border-radius:6px}
+.team-editor-card input[type="color"]{height:40px;cursor:pointer}
+
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;margin:20px 0}
+.btn{padding:12px 25px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;flex:1}
+.btn-save{background:linear-gradient(135deg,var(--red),var(--gold));color:#000}
+.btn-reset{background:var(--input);color:var(--cyan);border:2px solid var(--cyan)}
+.btn:hover{opacity:0.9}
+
+/* MEMBER ADD */
+.member-form{background:var(--input);padding:15px;border-radius:10px;margin-bottom:20px;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px}
+.member-form input,.member-form select{padding:10px;background:var(--card);color:var(--text);border:1px solid var(--cyan);border-radius:6px}
+.member-form button{padding:10px 20px;background:var(--cyan);color:#000;border:none;border-radius:6px;cursor:pointer;font-weight:bold}
+
+/* MESSAGE */
+.message{padding:15px;border-radius:8px;margin:15px 0;display:none;font-weight:bold;border:2px solid}
+.message.show{display:block}
+.message.success{background:rgba(78,205,196,0.2);color:var(--cyan);border-color:var(--cyan)}
+.message.error{background:rgba(255,107,107,0.2);color:var(--red);border-color:var(--red)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .member-form{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+}
 </style>
 </head>
 <body>
-<nav>
-  <div class="logo">NAJAH <span>Union</span></div>
-  <div class="hbg" onclick="toggleNav()" id="hbg"><span></span><span></span><span></span></div>
-  <ul class="nl" id="nl">
-    <li><a href="#" onclick="go('teams',this);cn()">🏆 Teams</a></li>
-    <li><a href="#" onclick="go('lb',this);cn()" class="active">📊 Points</a></li>
-    <li><a href="#" onclick="go('members',this);cn()">👥 Members</a></li>
-    <li><a href="#" onclick="go('cands',this);cn()">🗳 Candidates</a></li>
-    <li><a href="#" onclick="go('events',this);cn()">📅 Events</a></li>
-    <li><a href="#" onclick="go('chat',this);cn()">💬 Chat</a></li>
-    <li><a href="#" onclick="go('gallery',this);cn()">🖼 Gallery</a></li>
-    <li><a href="#" onclick="go('arts',this);cn()">🌟 Arts Fest</a></li>
-    <li><a href="#" onclick="go('sports',this);cn()">⚽ Sports</a></li>
-    <li><a href="#" onclick="go('settings',this);cn()">⚙ Settings</a></li>
-    <li><a href="#" onclick="go('register',this);cn()">✍ Register</a></li>
-    <li><a href="#" onclick="go('admin',this);cn()">🔐 Admin</a></li>
-  </ul>
-</nav>
-<div class="tab-bar">
-  <button class="tb" onclick="go('teams',this)">🏆 Teams</button>
-  <button class="tb active" onclick="go('lb',this)">📊 Points</button>
-  <button class="tb" onclick="go('members',this)">👥 Members</button>
-  <button class="tb" onclick="go('cands',this)">🗳 Candidates</button>
-  <button class="tb" onclick="go('events',this)">📅 Events</button>
-  <button class="tb" onclick="go('chat',this)">💬 Chat</button>
-  <button class="tb" onclick="go('gallery',this)">🖼 Gallery</button>
-  <button class="tb" onclick="go('arts',this)">🌟 Arts Fest</button>
-  <button class="tb" onclick="go('sports',this)">⚽ Sports</button>
-  <button class="tb" onclick="go('settings',this)">⚙ Settings</button>
-  <button class="tb" onclick="go('register',this)">✍ Register</button>
-  <button class="tb" onclick="go('admin',this)">🔐 Admin</button>
-</div>
-<div class="hero">
-  <div class="heyebrow" id="heyebrow">Class Union — Academic Year 2025–2026</div>
-  <h1>Welcome to <em id="htitle">NAJAH</em></h1>
-  <p id="hsub">Track points, connect with teammates, vote for leaders, and celebrate talents.</p>
-  <div class="hstats">
-    <div class="hstat"><div class="num" id="st-m">0</div><div class="lbl">Members</div></div>
-    <div class="hstat"><div class="num" id="st-e">0</div><div class="lbl">Events</div></div>
-    <div class="hstat"><div class="num" id="st-v">0</div><div class="lbl">Votes</div></div>
-    <div class="hstat"><div class="num" id="st-t">0</div><div class="lbl">Top Score</div></div>
-  </div>
-</div>
 
-<!-- TEAMS -->
-<div class="panel" id="panel-teams">
-  <div class="sh"><div class="gb"></div><h2>Team Competition</h2><p>Red vs Blue vs Green — live standings</p></div>
-  <div class="trow" id="trow"></div>
-  <div class="lbw" id="tlb"></div>
-</div>
-
-<!-- LEADERBOARD -->
-<div class="panel active" id="panel-lb">
-  <div class="sh"><div class="gb"></div><h2>Points Leaderboard</h2><p>Individual rankings by total points</p></div>
-  <div class="sr">
-    <input class="si" id="lbs" placeholder="Search…" oninput="rLB()">
-    <button class="fb active" onclick="lbf('all',this)">All</button>
-    <button class="fb" onclick="lbf('Red',this)">🟣 Purple</button>
-    <button class="fb" onclick="lbf('Blue',this)">🔵 Blue</button>
-    <button class="fb" onclick="lbf('Green',this)">🟢 Green</button>
-  </div>
-  <div class="lbw"><div class="lbh"><span>#</span><span>Member</span><span>Team</span><span>Role</span><span>Points</span></div><div id="lbrows"></div></div>
-</div>
-
-<!-- MEMBERS -->
-<div class="panel" id="panel-members">
-  <div class="sh"><div class="gb"></div><h2>Member Directory</h2><p>Click any card to view & edit profile</p></div>
-  <div class="sr">
-    <input class="si" id="ms" placeholder="Search…" oninput="rM()">
-    <button class="fb active" onclick="mf('all',this)">All</button>
-    <button class="fb" onclick="mf('Red',this)">🟣 Purple</button>
-    <button class="fb" onclick="mf('Blue',this)">🔵 Blue</button>
-    <button class="fb" onclick="mf('Green',this)">🟢 Green</button>
-  </div>
-  <div class="g3" id="mgrid"></div>
-</div>
-
-<!-- PROFILE MODAL -->
-<div class="mo" id="pmo" onclick="cmo(event)">
-  <div class="md" onclick="event.stopPropagation()">
-    <div class="mdh">
-      <button class="mcl" onclick="closePM()">✕</button>
-      <div class="mav" id="mav"></div>
-      <div class="mdn" id="mdn"></div>
-      <div class="mdr" id="mdr"></div>
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>NAJAH Union</h1>
+    <div class="login-field">
+      <label>Email:</label>
+      <input type="email" id="email" value="admin@example.com" placeholder="admin@example.com">
     </div>
-    <div class="mdb">
-      <div id="minfo"></div>
-      <div class="pbio" id="mbio"></div>
-      <div class="achl" id="mach"></div>
-      <button class="ebtn" onclick="tgEdit()">✏ Edit Profile</button>
-      <div class="pef" id="pef">
-        <div style="height:.7rem"></div>
-        <div class="pfl"><label>Bio</label><textarea id="pfbio" rows="3"></textarea></div>
-        <div class="pfl"><label>Phone</label><input id="pfph" placeholder="+966 5xx xxx"></div>
-        <div class="pfl"><label>Add Achievement</label>
-          <div style="display:flex;gap:.35rem"><input id="pfach" placeholder="e.g. 🏆 Top of Class"><button onclick="addAch()" class="badd" style="white-space:nowrap">Add</button></div>
+    <div class="login-field">
+      <label>Password:</label>
+      <input type="password" id="password" value="admin123" placeholder="admin123">
+    </div>
+    <button class="login-btn" onclick="login()">🚀 Log In</button>
+    <button class="login-btn" style="background:var(--cyan);color:#000;margin-top:10px" onclick="signup()">✨ Sign Up</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header>
+    <h1>NAJAH Union</h1>
+    <div style="flex:1;margin-left:30px">
+      <div class="nav-buttons">
+        <button class="nav-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+        <button class="nav-btn" onclick="switchTab('admin')">⚙️ Admin</button>
+      </div>
+    </div>
+    <div>
+      <span class="user-info" id="userDisplay"></span>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+  </header>
+
+  <div class="content">
+    <!-- DASHBOARD -->
+    <div class="panel active" id="dashboard">
+      <div class="section">
+        <h2>🏆 Teams</h2>
+        <div class="grid" id="teamDisplay"></div>
+      </div>
+      <div class="section">
+        <h2>👥 Leaderboard</h2>
+        <div class="leaderboard" id="leaderboard"></div>
+      </div>
+    </div>
+
+    <!-- ADMIN -->
+    <div class="panel" id="admin">
+      <div class="section">
+        <h2>🎨 Team Settings</h2>
+        <div style="margin-bottom:20px">
+          <label style="color:var(--cyan);font-weight:bold;display:block;margin-bottom:10px">How many teams?</label>
+          <select id="teamCount" onchange="updateTeamCount()" style="padding:10px;background:var(--input);color:var(--text);border:1px solid var(--cyan);border-radius:6px">
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
         </div>
-        <button class="sbp" onclick="saveP()">💾 Save Profile</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- CANDIDATES -->
-<div class="panel" id="panel-cands">
-  <div class="sh"><div class="gb"></div><h2>Candidate Nominations</h2><p>Vote for your class representatives</p></div>
-  <div class="g2" id="cgrid"></div>
-</div>
-
-<!-- EVENTS -->
-<div class="panel" id="panel-events">
-  <div class="sh"><div class="gb"></div><h2>Events & Announcements</h2><p>Upcoming and past class activities</p></div>
-  <div id="elist"></div>
-</div>
-
-<!-- CHAT -->
-<div class="panel" id="panel-chat">
-  <div class="sh"><div class="gb"></div><h2>Team Chat</h2><p>Discussions by team channel</p></div>
-  <div class="ctabs">
-    <button class="cbtn all active" onclick="swC('All',this)">📢 All</button>
-    <button class="cbtn red" onclick="swC('Red',this)">🟣 Purple</button>
-    <button class="cbtn blue" onclick="swC('Blue',this)">🔵 Blue</button>
-    <button class="cbtn green" onclick="swC('Green',this)">🟢 Green</button>
-  </div>
-  <div class="cbox" id="cbox"></div>
-  <div class="crow">
-    <select class="csel" id="csel"><option value="">Select name…</option></select>
-    <input class="cinp" id="cinp" placeholder="Type a message…" onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="bsend" onclick="sendChat()">Send</button>
-  </div>
-</div>
-
-<!-- GALLERY -->
-<div class="panel" id="panel-gallery">
-  <div class="sh"><div class="gb"></div><h2>Photo Gallery</h2><p>🎓 Graduation · 📚 Study · 🏆 Winners · 🎉 Party · ⚽ Sports — upload your real photos!</p></div>
-  <input type="file" id="galfile" accept="image/*" multiple style="display:none" onchange="handleGalUpload(this)">
-  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.85rem">
-    <button class="fb active" onclick="gFilter('All',this)" style="border-radius:20px">🖼 All</button>
-    <button class="fb" onclick="gFilter('Graduation Day',this)" style="border-radius:20px">🎓 Graduation</button>
-    <button class="fb" onclick="gFilter('Study Session',this)" style="border-radius:20px">📚 Study</button>
-    <button class="fb" onclick="gFilter('Winners Cup',this)" style="border-radius:20px">🏆 Winners</button>
-    <button class="fb" onclick="gFilter('Class Party',this)" style="border-radius:20px">🎉 Party</button>
-    <button class="fb" onclick="gFilter('Sports Day',this)" style="border-radius:20px">⚽ Sports</button>
-  </div>
-  <div style="display:flex;gap:.7rem;margin-bottom:1.05rem;flex-wrap:wrap">
-    <div class="gup" style="flex:1;min-width:180px;border-color:#7C3AED;border-radius:14px" onclick="triggerUpload()"><div style="font-size:1.8rem">🖼</div><p style="font-size:.78rem;margin-top:.3rem"><strong>Upload Real Photos</strong><br>JPG, PNG — multiple OK</p></div>
-    <div class="gup" style="flex:1;min-width:180px;border-radius:14px" onclick="addGal()"><div style="font-size:1.8rem">✏️</div><p style="font-size:.78rem;margin-top:.3rem"><strong>Add with Caption</strong><br>Type caption manually</p></div>
-  </div>
-  <div class="gg" id="ggrid"></div>
-</div>
-
-<!-- GALLERY CAPTION FORM MODAL -->
-<div class="mo" id="gal-form-overlay" onclick="if(event.target.id==='gal-form-overlay')closeGalForm()">
-  <div class="md" onclick="event.stopPropagation()" style="max-width:380px">
-    <div class="mdh" style="background:linear-gradient(135deg,#3b0764,#7C3AED)">
-      <button class="mcl" onclick="closeGalForm()">✕</button>
-      <div style="font-size:2rem;margin-bottom:.4rem">📷</div>
-      <div class="mdn" id="gal-form-title">Add Photo with Caption</div>
-    </div>
-    <div class="mdb">
-      <p id="gal-form-filehint" style="display:none;font-size:.76rem;color:var(--muted);background:var(--cream);padding:.6rem;border-radius:8px;margin-bottom:.75rem">ℹ️ This caption will be used for all selected photos (numbered automatically).</p>
-      <div class="pfl"><label>Caption *</label><input id="gal-form-cap" placeholder="e.g. Graduation Ceremony 2026"></div>
-      <div class="pfl"><label>Description (optional)</label><input id="gal-form-sub" placeholder="e.g. Held at the main auditorium"></div>
-      <div class="pfl"><label>Section</label>
-        <select id="gal-form-sec" style="width:100%;padding:.5rem .75rem;border:1px solid var(--border);border-radius:8px;font-family:'Inter',sans-serif;font-size:.8rem;outline:none;background:var(--white);color:var(--navy)">
-          <option value="Graduation">🎓 Graduation</option>
-          <option value="Study">📚 Study Session</option>
-          <option value="Winners">🏆 Winners Cup</option>
-          <option value="Party">🎉 Class Party</option>
-          <option value="Sports">⚽ Sports Day</option>
-          <option value="Arts">🌟 Arts Fest</option>
-          <option value="Other">📌 Other</option>
-        </select>
-      </div>
-      <button class="sbp" onclick="submitGalForm()" style="background:#7C3AED">✅ Add to Gallery</button>
-    </div>
-  </div>
-</div>
-
-<!-- ARTS FEST -->
-<div class="panel" id="panel-arts">
-  <div class="afh">
-    <h2>🌟 <em>Nujoom-ul-Funoon</em></h2>
-    <p>نجوم الفنون · Arts Festival of NAJAH Class</p>
-    <div class="afst">
-      <div><div class="num" id="af-p">0</div><div class="lbl">Participants</div></div>
-      <div><div class="num" id="af-v">0</div><div class="lbl">Votes</div></div>
-      <div><div class="num">8</div><div class="lbl">Categories</div></div>
-      <div><div class="num" id="af-s">0</div><div class="lbl">Performances</div></div>
-    </div>
-  </div>
-  <div class="stabs">
-    <button class="stab af" onclick="afTab('afp2',this)">👤 Participants</button>
-    <button class="stab" onclick="afTab('afs2',this)">📅 Schedule</button>
-    <button class="stab" onclick="afTab('afg2',this)">🖼 Gallery</button>
-    <button class="stab" onclick="afTab('afj2',this)">⭐ Judges & Scores</button>
-    <button class="stab" onclick="afTab('afr2',this)">✍ Register</button>
-  </div>
-  <div class="sp2 on" id="afp2">
-    <div class="afcats">
-      <button class="afcb active" onclick="afC('All',this)">🎭 All</button>
-      <button class="afcb" onclick="afC('Singing',this)">🎤 Singing</button>
-      <button class="afcb" onclick="afC('Drawing',this)">🎨 Drawing</button>
-      <button class="afcb" onclick="afC('Poetry',this)">📜 Poetry</button>
-      <button class="afcb" onclick="afC('Acting',this)">🎭 Acting</button>
-      <button class="afcb" onclick="afC('Photography',this)">📸 Photography</button>
-      <button class="afcb" onclick="afC('Dance',this)">💃 Dance</button>
-      <button class="afcb" onclick="afC('Calligraphy',this)">✍ Calligraphy</button>
-      <button class="afcb" onclick="afC('Short Film',this)">🎬 Short Film</button>
-    </div>
-    <div class="g3" id="afpg"></div>
-  </div>
-  <div class="sp2" id="afs2"><div id="afsl"></div></div>
-  <div class="sp2" id="afg2"><div class="gg" id="afgg"></div></div>
-  <div class="sp2" id="afj2">
-    <div class="sh"><div class="gb" style="background:var(--pur)"></div><h2>Judges</h2></div>
-    <div class="g2" id="afjg" style="margin-bottom:1.6rem"></div>
-    <div class="sh"><div class="gb" style="background:var(--pur)"></div><h2>Score Sheet</h2><p>Enter judge scores (0–10 each)</p></div>
-    <div class="scw"><div class="sch"><span>Category</span><span>Participant</span><span>Creativity</span><span>Skill</span><span>Presence</span><span>Total</span></div><div id="afsc2"></div></div>
-  </div>
-  <div class="sp2" id="afr2">
-    <div class="areg">
-      <h3>🌟 Arts Fest Registration</h3>
-      <div class="af"><label>Full Name</label><input id="afn" placeholder="Your name"></div>
-      <div class="af"><label>Category</label>
-        <select id="afc"><option value="Singing">🎤 Singing</option><option value="Drawing">🎨 Drawing</option><option value="Poetry">📜 Poetry</option><option value="Acting">🎭 Acting</option><option value="Photography">📸 Photography</option><option value="Dance">💃 Dance</option><option value="Calligraphy">✍ Calligraphy</option><option value="Short Film">🎬 Short Film</option></select>
-      </div>
-      <div class="af"><label>Team</label><select id="aft"><option value="Red">🟣 Purple</option><option value="Blue">🔵 Blue</option><option value="Green">🟢 Green</option></select></div>
-      <div class="af"><label>Description</label><textarea id="afb" placeholder="What will you perform or present?"></textarea></div>
-      <button class="baf" onclick="afReg()">✨ Submit Registration</button>
-      <div id="afmsg" style="margin-top:.6rem;font-size:.78rem;text-align:center"></div>
-    </div>
-  </div>
-</div>
-
-<!-- SPORTS -->
-<div class="panel" id="panel-sports">
-  <div class="sph">
-    <h2>⚽ <em>Sports Festival</em></h2>
-    <p>Team competitions, matches & athletic achievements</p>
-    <div class="spst">
-      <div><div class="num" id="sp-m">0</div><div class="lbl">Matches</div></div>
-      <div><div class="num" id="sp-a">0</div><div class="lbl">Athletes</div></div>
-      <div><div class="num">3</div><div class="lbl">Teams</div></div>
-      <div><div class="num" id="sp-s">0</div><div class="lbl">Sports</div></div>
-    </div>
-  </div>
-  <div class="stabs">
-    <button class="stab sp" onclick="spTab('spm2',this)">🏟 Matches</button>
-    <button class="stab" onclick="spTab('spst2',this)">📊 Standings</button>
-    <button class="stab" onclick="spTab('spat2',this)">🏅 Athletes</button>
-    <button class="stab" onclick="spTab('sprg2',this)">✍ Register</button>
-  </div>
-  <div class="sp2 on" id="spm2">
-    <div class="sptabs">
-      <button class="sptb active" onclick="spSp('All',this)">🏟 All</button>
-      <button class="sptb" onclick="spSp('Football',this)">⚽ Football</button>
-      <button class="sptb" onclick="spSp('Basketball',this)">🏀 Basketball</button>
-      <button class="sptb" onclick="spSp('Volleyball',this)">🏐 Volleyball</button>
-      <button class="sptb" onclick="spSp('Table Tennis',this)">🏓 Table Tennis</button>
-      <button class="sptb" onclick="spSp('Running',this)">🏃 Running</button>
-    </div>
-    <div id="spml"></div>
-  </div>
-  <div class="sp2" id="spst2"><div class="spstd"><div class="sph2"><span>#</span><span>Team</span><span>W</span><span>D</span><span>L</span><span>GF</span><span>Pts</span></div><div id="spstb"></div></div></div>
-  <div class="sp2" id="spat2"><div class="g3" id="spatg"></div></div>
-  <div class="sp2" id="sprg2">
-    <div class="sreg">
-      <h3>⚽ Sports Registration</h3>
-      <div class="sf"><label>Full Name</label><input id="spn" placeholder="Your name"></div>
-      <div class="sf"><label>Sport</label><select id="sps"><option value="Football">⚽ Football</option><option value="Basketball">🏀 Basketball</option><option value="Volleyball">🏐 Volleyball</option><option value="Table Tennis">🏓 Table Tennis</option><option value="Running">🏃 Running</option></select></div>
-      <div class="sf"><label>Team</label><select id="spt"><option value="Red">🟣 Purple</option><option value="Blue">🔵 Blue</option><option value="Green">🟢 Green</option></select></div>
-      <button class="bsp" onclick="spReg()">🏅 Register as Athlete</button>
-      <div id="spmsg" style="margin-top:.6rem;font-size:.78rem;text-align:center"></div>
-    </div>
-  </div>
-</div>
-
-
-<!-- REGISTER -->
-<div class="panel" id="panel-register">
-  <div class="reg-wrap">
-    <div class="reg-hero">
-      <h2>✍ Join <em>NAJAH</em></h2>
-      <p>Register as a NAJAH class member — your profile will appear after admin approval</p>
-    </div>
-    <div class="reg-steps">
-      <div class="reg-step"><div class="step-num">1</div><div class="step-lbl">Fill Form</div></div>
-      <div class="reg-step"><div class="step-num">2</div><div class="step-lbl">Submit</div></div>
-      <div class="reg-step"><div class="step-num">3</div><div class="step-lbl">Admin Approves</div></div>
-      <div class="reg-step"><div class="step-num">4</div><div class="step-lbl">You're In! 🎉</div></div>
-    </div>
-    <div class="reg-card">
-      <h3>👤 Personal Information</h3>
-      <div class="reg-field"><label>Full Name *</label><input id="rg-name" placeholder="e.g. Ahmed Hassan Al-Nasser"></div>
-      <div class="reg-field"><label>Student ID *</label><input id="rg-id" placeholder="e.g. 2024001"></div>
-      <div class="reg-field"><label>Phone Number *</label><input id="rg-phone" placeholder="e.g. +966 5xx xxx xxxx" type="tel"></div>
-      <div class="reg-field"><label>Choose Your Team *</label>
-        <select id="rg-team">
-          <option value="">— Select a team —</option>
-          <option value="Red">🟣 Purple Team</option>
-          <option value="Blue">🔵 Blue Team</option>
-          <option value="Green">🟢 Green Team</option>
-        </select>
-      </div>
-      <div class="reg-field"><label>Role / Title</label><input id="rg-role" placeholder="e.g. Member, Student (optional)"></div>
-      <div class="reg-field"><label>Bio (optional)</label><textarea id="rg-bio" placeholder="Tell the class a bit about yourself…"></textarea></div>
-      <button class="btn-reg" onclick="submitReg()">🚀 Submit Registration</button>
-      <div class="reg-msg" id="reg-msg"></div>
-    </div>
-    <div class="reg-card" style="background:var(--cream);border-style:dashed">
-      <p style="font-size:.8rem;color:var(--muted);text-align:center;line-height:1.6">
-        ⏳ After submitting, your registration will be reviewed by the <strong>class admin</strong>.<br>
-        Once approved, your profile will appear in the Members directory and leaderboard.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- SETTINGS -->
-<div class="panel" id="panel-settings">
-  <div class="sh"><div class="gb"></div><h2>Settings</h2><p>Customize NAJAH Class Union</p></div>
-  <div class="setg">
-    <div class="setc"><h3>🌙 Appearance</h3>
-      <div class="setr"><div><div class="setl">Dark Mode</div><div class="setd">Switch to dark theme</div></div><label class="tog"><input type="checkbox" id="tdark" onchange="togDark(this)"><span class="tsl"></span></label></div>
-    </div>
-    <div class="setc"><h3>🌐 Language</h3>
-      <div class="setl" style="margin-bottom:.6rem">Interface Language</div>
-      <div class="lgrp"><button class="lbtn active" id="len" onclick="setLang('en',this)">🇬🇧 English</button><button class="lbtn" id="lar" onclick="setLang('ar',this)">🇸🇦 العربية</button></div>
-    </div>
-    <div class="setc"><h3>✏ Class Info</h3>
-      <div class="setf"><label>Class Name</label><input class="setinp" id="scn" value="NAJAH"></div>
-      <div class="setf"><label>Academic Year</label><input class="setinp" id="syr" value="2025–2026"></div>
-      <div class="setf"><label>Program</label><input class="setinp" id="spg" value="General Program"></div>
-      <button class="bss" onclick="saveCInfo()">💾 Save Class Info</button>
-    </div>
-    <div class="setc"><h3>🎨 Team Names</h3>
-      <div class="setf"><label>Team 1</label><input class="setinp" id="st1" value="Phoenix"></div>
-      <div class="setf"><label>Team 2</label><input class="setinp" id="st2" value="Falcon"></div>
-      <div class="setf"><label>Team 3</label><input class="setinp" id="st3" value="Warriors"></div>
-      <button class="bss" onclick="saveTNames()">💾 Save Team Names</button>
-    </div>
-    <div class="setc"><h3>⭐ Points System</h3>
-      <div class="setr"><div class="setl">Points per Event Attended</div><input class="ptsin" id="sep" value="10" type="number" style="width:60px"></div>
-      <div class="setr"><div class="setl">Points per Vote Cast</div><input class="ptsin" id="svp" value="5" type="number" style="width:60px"></div>
-      <div class="setr"><div class="setl">Points per Arts Entry</div><input class="ptsin" id="sap" value="20" type="number" style="width:60px"></div>
-      <div class="setr"><div class="setl">Points per Sports Win</div><input class="ptsin" id="ssp" value="30" type="number" style="width:60px"></div>
-      <button class="bss" style="margin-top:.6rem" onclick="alert('Points rules saved! ✅')">💾 Save Rules</button>
-    </div>
-    <div class="setc"><h3>🔐 Change Admin Password</h3>
-      <div class="setf"><label>Current Password</label><input type="password" class="setinp" id="scur" placeholder="Current password"></div>
-      <div class="setf"><label>New Password</label><input type="password" class="setinp" id="snew" placeholder="New password (min 4 chars)"></div>
-      <div class="setf"><label>Confirm New Password</label><input type="password" class="setinp" id="scf" placeholder="Confirm new password"></div>
-      <button class="bss" onclick="changePW()">🔑 Change Password</button>
-      <div id="pwmsg" style="margin-top:.45rem;font-size:.75rem;text-align:center"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN -->
-<div class="panel" id="panel-admin">
-  <div class="lo" id="alo">
-    <div class="lb2">
-      <div style="font-size:2.5rem;margin-bottom:.78rem">🔐</div>
-      <h3>Admin Access</h3>
-      <p>Enter the admin password to manage class data</p>
-      <input class="linp" id="apw" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryUnlock()" maxlength="24" autocomplete="off">
-      <button class="bul" onclick="tryUnlock()">Unlock Admin Panel</button>
-      <div class="lerr" id="lerr"></div>
-      <div class="lhint">Contact your class admin for the password</div>
-    </div>
-  </div>
-  <div class="sh"><div class="gb"></div><h2>Admin Panel</h2><p>Manage all class data — password protected</p></div>
-  <div class="aw">⚠️ Admin mode — changes apply instantly &nbsp;<a href="#" onclick="lockAdmin()" style="color:var(--bad);font-weight:700;text-decoration:none">🔒 Lock</a></div>
-  <div class="admsec">
-    <div class="ac"><h3>👤 Add Member</h3>
-      <div class="af2">
-        <div class="ar"><input class="ai" id="amn" placeholder="Full name"><input class="ai" id="amr" placeholder="Role"></div>
-        <div class="ar"><select class="as" id="amt"><option value="Red">🟣 Purple</option><option value="Blue">🔵 Blue</option><option value="Green">🟢 Green</option></select><input class="ai" type="number" id="amp" placeholder="Points"><button class="badd" onclick="aAddM()">Add</button></div>
-        <div class="al" id="alm"></div>
-      </div>
-    </div>
-    <div class="ac"><h3>⭐ Edit Points</h3>
-      <p style="font-size:.72rem;color:var(--muted);margin-bottom:.6rem">Set exact points for any member</p>
-      <div class="ptsl" id="ptsl"></div>
-    </div>
-    <div class="ac"><h3>🗳 Add Candidate</h3>
-      <div class="af2">
-        <input class="ai" id="acn" placeholder="Candidate name">
-        <input class="ai" id="acp" placeholder="Position">
-        <input class="ai" id="acb" placeholder="Short bio">
-        <div class="ar"><select class="as" id="act"><option value="Red">🟣 Purple</option><option value="Blue">🔵 Blue</option><option value="Green">🟢 Green</option></select><button class="badd" onclick="aAddC()">Add</button></div>
-        <div class="al" id="alc"></div>
-      </div>
-    </div>
-    <div class="ac"><h3>📅 Add Event</h3>
-      <div class="af2">
-        <input class="ai" id="aet" placeholder="Event title">
-        <input class="ai" id="aem" placeholder="Location & time">
-        <div class="ar"><input class="ai" id="aed" placeholder="Day" maxlength="2" style="max-width:52px"><input class="ai" id="aemo" placeholder="Mon" maxlength="3" style="max-width:52px"><select class="as" id="aes"><option value="upcoming">Upcoming</option><option value="today">Today</option><option value="past">Past</option></select><button class="badd" onclick="aAddE()">Add</button></div>
-        <div class="al" id="ale"></div>
-      </div>
-    </div>
-    <div class="ac"><h3>🌟 Arts Fest Participants</h3>
-      <div class="af2">
-        <input class="ai" id="aafn" placeholder="Participant name">
-        <div class="ar">
-          <select class="as" id="aafc"><option value="Singing">🎤 Singing</option><option value="Drawing">🎨 Drawing</option><option value="Poetry">📜 Poetry</option><option value="Acting">🎭 Acting</option><option value="Photography">📸 Photography</option><option value="Dance">💃 Dance</option><option value="Calligraphy">✍ Calligraphy</option><option value="Short Film">🎬 Short Film</option></select>
-          <select class="as" id="aaft"><option value="Red">🟣 Purple</option><option value="Blue">🔵 Blue</option><option value="Green">🟢 Green</option></select>
-          <button class="badd" onclick="aAddAF()">Add</button>
+        <div class="team-editor-grid" id="teamEditor"></div>
+        <div class="btn-row">
+          <button class="btn btn-save" onclick="saveTeams()">💾 Save</button>
+          <button class="btn btn-reset" onclick="resetTeams()">↻ Reset</button>
         </div>
-        <div class="al" id="alaf"></div>
+        <div class="message" id="teamMsg"></div>
       </div>
-    </div>
-    <div class="ac"><h3>⚽ Sports Matches</h3>
-      <div class="af2">
-        <div class="ar"><select class="as" id="amt1"><option value="Red">🟣 Purple</option><option value="Blue">🔵 Blue</option><option value="Green">🟢 Green</option></select><select class="as" id="amt2"><option value="Blue">🔵 Blue</option><option value="Red">🟣 Purple</option><option value="Green">🟢 Green</option></select></div>
-        <div class="ar"><select class="as" id="ams"><option value="Football">⚽ Football</option><option value="Basketball">🏀 Basketball</option><option value="Volleyball">🏐 Volleyball</option><option value="Table Tennis">🏓 Table Tennis</option><option value="Running">🏃 Running</option></select><select class="as" id="amst"><option value="upcoming">Upcoming</option><option value="live">🟣 Live</option><option value="done">Done</option></select><button class="badd" onclick="aAddMatch()">Add</button></div>
-        <input class="ai" id="amd" placeholder="Date & time (e.g. Jun 20 · 3PM)">
-        <div class="al" id="almat"></div>
-      </div>
-    </div>
-    <div class="ac"><h3>🖼 Gallery Photo</h3>
-      <div class="af2">
-        <input class="ai" id="agc" placeholder="Caption">
-        <input class="ai" id="ags" placeholder="Date or description">
-        <div class="ar"><select class="as" id="age"><option value="🎓">🎓</option><option value="📚">📚</option><option value="🏆">🏆</option><option value="🎉">🎉</option><option value="⚽">⚽</option><option value="🎨">🎨</option><option value="📸">📸</option><option value="🌟">🌟</option><option value="🤝">🤝</option></select><button class="badd" onclick="aAddGal()">Add</button></div>
-      </div>
-    </div>
-    <div class="ac"><h3>⭐ Points Settings</h3>
-      <p style="font-size:.72rem;color:var(--muted);margin-bottom:.7rem">Set point values awarded for each activity</p>
-      <div class="af2">
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)"><span style="font-size:.78rem;font-weight:600">Event Attended</span><input class="ptsin" id="pset-ev" value="10" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)"><span style="font-size:.78rem;font-weight:600">Vote Cast</span><input class="ptsin" id="pset-vt" value="5" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)"><span style="font-size:.78rem;font-weight:600">Arts Fest Entry</span><input class="ptsin" id="pset-af" value="20" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)"><span style="font-size:.78rem;font-weight:600">Arts Fest Win</span><input class="ptsin" id="pset-afw" value="50" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)"><span style="font-size:.78rem;font-weight:600">Sports Match Win</span><input class="ptsin" id="pset-spw" value="30" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border)"><span style="font-size:.78rem;font-weight:600">Sports Match Draw</span><input class="ptsin" id="pset-spd" value="10" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding:.4rem 0"><span style="font-size:.78rem;font-weight:600">New Member Bonus</span><input class="ptsin" id="pset-nm" value="15" type="number" style="width:60px;padding:.28rem .4rem;border:1px solid var(--border);border-radius:6px;font-size:.78rem;text-align:center;outline:none;background:var(--white);color:var(--navy)"></div>
-        <button class="badd" style="width:100%;margin-top:.4rem;background:var(--ok)" onclick="savePtsSettings()">💾 Save Points Rules</button>
-        <div id="pts-set-msg" style="font-size:.74rem;text-align:center;margin-top:.3rem"></div>
-      </div>
-    </div>
 
-    <div class="ac"><h3>🌟 Arts Fest Points</h3>
-      <p style="font-size:.72rem;color:var(--muted);margin-bottom:.65rem">Award points to Arts Fest participants</p>
-      <div class="af2">
-        <select class="as" id="afpts-member" style="width:100%"></select>
-        <div class="ar">
-          <input class="ai" type="number" id="afpts-val" placeholder="Points to add">
-          <select class="as" id="afpts-reason"><option value="Entry">Entry</option><option value="1st Place">🥇 1st Place</option><option value="2nd Place">🥈 2nd Place</option><option value="3rd Place">🥉 3rd Place</option><option value="Special Award">⭐ Special Award</option></select>
+      <div class="section">
+        <h2>👤 Add Member</h2>
+        <div class="member-form">
+          <input type="text" id="newName" placeholder="Name">
+          <input type="number" id="newPoints" placeholder="Points" value="0">
+          <select id="newTeam"></select>
+          <button onclick="addMember()">➕ Add</button>
         </div>
-        <button class="badd" style="width:100%" onclick="awardAFPoints()">⭐ Award Points</button>
-        <div id="afpts-msg" style="font-size:.74rem;text-align:center;margin-top:.32rem"></div>
-      </div>
-    </div>
-
-    <div class="ac"><h3>⚽ Sports Points</h3>
-      <p style="font-size:.72rem;color:var(--muted);margin-bottom:.65rem">Award points to sports athletes</p>
-      <div class="af2">
-        <select class="as" id="sppts-member" style="width:100%"></select>
-        <div class="ar">
-          <input class="ai" type="number" id="sppts-val" placeholder="Points to add">
-          <select class="as" id="sppts-reason"><option value="Win">🏆 Match Win</option><option value="Draw">🤝 Draw</option><option value="Participation">🏅 Participation</option><option value="Best Player">⭐ Best Player</option><option value="Top Scorer">🥇 Top Scorer</option></select>
-        </div>
-        <button class="badd" style="width:100%" onclick="awardSPPoints()">⭐ Award Points</button>
-        <div id="sppts-msg" style="font-size:.74rem;text-align:center;margin-top:.32rem"></div>
-      </div>
-    </div>
-
-    
-    <div class="ac" style="grid-column:1/-1">
-      <h3>⏳ Pending Registrations <span class="pending-badge" id="pend-count">0 waiting</span></h3>
-      <p style="font-size:.72rem;color:var(--muted);margin-bottom:.75rem">Review and approve or reject student registration requests</p>
-      <div id="pend-list"><div class="empty-pend">✅ No pending registrations</div></div>
-    </div>
-
-    <div class="ac"><h3>⚙ Tools</h3>
-      <div class="af2">
-        <button class="badd" style="width:100%;background:var(--ok)" onclick="exportData()">📤 Export Data (JSON)</button>
-        <button class="badd" style="width:100%;background:var(--bad);margin-top:.38rem" onclick="resetVotes()">🗑 Reset All Votes</button>
+        <div class="message" id="memberMsg"></div>
+        <div id="memberList"></div>
       </div>
     </div>
   </div>
 </div>
-
-<footer><strong id="fname">NAJAH Class Union</strong> · Academic Year <span id="fyr">2025–2026</span> · All rights reserved</footer>
 
 <script>
-// ═══ DATA ═══
-let PW='3169',unlocked=false;
-const TC={Red:'#7C3AED',Blue:'#2563EB',Green:'#16A34A'};
-const TE={Red:'🟣',Blue:'🔵',Green:'🟢'};
-const CE={Singing:'🎤',Drawing:'🎨',Poetry:'📜',Acting:'🎭',Photography:'📸',Dance:'💃',Calligraphy:'✍','Short Film':'🎬'};
-const SE={Football:'⚽',Basketball:'🏀',Volleyball:'🏐','Table Tennis':'🏓',Running:'🏃'};
-let cfg={name:'NAJAH',year:'2025–2026',prog:'General Program',teams:['Phoenix','Falcon','Warriors']};
+const db = {
+  users: [{id:1,email:'admin@example.com',password:'admin123',name:'Admin'}],
+  teams: [
+    {id:1,name:'Phoenix',color:'#FF6B6B'},
+    {id:2,name:'Falcon',color:'#4ECDC4'},
+    {id:3,name:'Warriors',color:'#FFE66D'}
+  ],
+  members: [
+    {id:1,name:'Layla',team:1,points:250},
+    {id:2,name:'Omar',team:2,points:180},
+    {id:3,name:'Sara',team:3,points:200}
+  ]
+};
 
-let M=[];
-let C=[];
-let E=[];
-let G=[
-  {emoji:'🎓',cap:'Graduation Day',  sub:'NAJAH Class Graduation Ceremony 2025–2026', section:'Graduation', img:null},
-  {emoji:'📚',cap:'Study Session',   sub:'NAJAH Class Group Study 2025–2026',         section:'Study',      img:null},
-  {emoji:'🏆',cap:'Winners Cup',     sub:'NAJAH Class Championship Trophy 2025–2026', section:'Winners',    img:null},
-  {emoji:'🎉',cap:'Class Party',     sub:'NAJAH Class End-of-Year Party 2025–2026',   section:'Party',      img:null},
-  {emoji:'⚽',cap:'Sports Day',      sub:'NAJAH Class Sports Festival 2025–2026',     section:'Sports',     img:null},
-];
-let galSectionFilter='All';
-let chatMsgs={All:[],Red:[],Blue:[],Green:[]};
-let AFP=[];
-let AFS=[];
-let AFG=[];
-let AFJ=[];
-let SPM=[];
-let SPA=[];
-const afVoted={},voted={};
-let lbF='all',mF='all',afCF='All',spSF='All',chatCh='All',openMi=-1;
-// ═══ HELPERS ═══
-const ini=n=>n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
-const ri=i=>i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1;
-const rc=i=>['r1','r2','r3'][i]||'';
-const tSc=t=>M.filter(m=>m.team===t).reduce((s,m)=>s+m.pts,0);
-// ═══ STATS ═══
-function upStats(){
-  document.getElementById('st-m').textContent=M.length;
-  document.getElementById('st-e').textContent=E.length;
-  document.getElementById('st-v').textContent=C.reduce((s,c)=>s+c.votes,0);
-  document.getElementById('st-t').textContent=Math.max(0,...M.map(m=>m.pts));
-  document.getElementById('af-p').textContent=AFP.length;
-  document.getElementById('af-v').textContent=Object.keys(afVoted).length;
-  document.getElementById('af-s').textContent=AFS.length;
-  document.getElementById('sp-m').textContent=SPM.length;
-  document.getElementById('sp-a').textContent=SPA.length;
-  document.getElementById('sp-s').textContent=[...new Set(SPM.map(m=>m.sport))].length;
-}
-// ═══ TEAMS ═══
-function rTeams(){
-  const sc={Red:tSc('Red'),Blue:tSc('Blue'),Green:tSc('Green')};
-  const mx=Math.max(1,...Object.values(sc));
-  const cls=['r','b','g'];
-  document.getElementById('trow').innerHTML=['Red','Blue','Green'].map((t,i)=>`
-    <div class="tc ${cls[i]}"><div style="font-size:1.9rem;margin-bottom:.32rem">${TE[t]}</div>
-    <div class="tn">${cfg.teams[i]||t} Team</div>
-    <div class="tsn" style="color:${TC[t]}">${sc[t].toLocaleString()}</div>
-    <div class="tmc">${M.filter(m=>m.team===t).length} members</div>
-    <div class="tbar"><div class="tbf" style="width:${Math.round(sc[t]/mx*100)}%;background:${TC[t]}"></div></div></div>`).join('');
-  const s=[...M].sort((a,b)=>b.pts-a.pts);
-  document.getElementById('tlb').innerHTML=`<div class="lbh"><span>#</span><span>Member</span><span>Team</span><span>Role</span><span>Points</span></div>`+s.map((m,i)=>`<div class="lbr ${rc(i)}"><div class="lbrank">${ri(i)}</div><div style="display:flex;align-items:center;gap:.55rem"><div class="av" style="width:30px;height:30px;font-size:.68rem;background:${TC[m.team]}">${ini(m.name)}</div><div><div class="lbn">${m.name}</div><div class="lbs">${m.role}</div></div></div><div><span class="dot" style="background:${TC[m.team]}"></span>${m.team}</div><div style="font-size:.72rem;color:var(--muted)">${m.role}</div><div class="lbp">${m.pts.toLocaleString()}</div></div>`).join('');
-}
-// ═══ LB ═══
-function rLB(){
-  const q=(document.getElementById('lbs')?.value||'').toLowerCase();
-  const s=[...M].filter(m=>(lbF==='all'||m.team===lbF)&&m.name.toLowerCase().includes(q)).sort((a,b)=>b.pts-a.pts);
-  document.getElementById('lbrows').innerHTML=s.map((m,i)=>`<div class="lbr ${rc(i)}"><div class="lbrank">${ri(i)}</div><div style="display:flex;align-items:center;gap:.55rem"><div class="av" style="width:30px;height:30px;font-size:.68rem;background:${TC[m.team]}">${ini(m.name)}</div><div><div class="lbn">${m.name}</div><div class="lbs">${m.role}</div></div></div><div><span class="dot" style="background:${TC[m.team]}"></span>${m.team}</div><div style="font-size:.72rem;color:var(--muted)">${m.role}</div><div class="lbp">${m.pts.toLocaleString()}</div></div>`).join('');
-}
-function lbf(t,b){lbF=t;document.querySelectorAll('#panel-lb .fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');rLB();}
-// ═══ MEMBERS ═══
-function rM(){
-  const q=(document.getElementById('ms')?.value||'').toLowerCase();
-  const filtered=M.filter(m=>(mF==='all'||m.team===mF)&&m.name.toLowerCase().includes(q));
-  if(!filtered.length){document.getElementById('mgrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2.5rem;background:var(--white);border:1px solid var(--border);border-radius:14px;color:var(--muted)"><div style="font-size:2.5rem;margin-bottom:.6rem">👥</div><div style="font-weight:600;margin-bottom:.3rem">No members yet</div><div style="font-size:.82rem">Students can register using the ✍ Register tab</div></div>';return;}
-  document.getElementById('mgrid').innerHTML=filtered.map(m=>{
-    const i=M.indexOf(m);
-    return `<div class="mc" onclick="openP(${i})"><div class="av" style="width:50px;height:50px;font-size:1rem;background:${TC[m.team]};margin:0 auto">${ini(m.name)}</div><div class="mcn">${m.name}</div><div class="mcr">${m.role}</div><span class="badge b${m.team[0].toLowerCase()}">${TE[m.team]} ${m.team}</span><div style="font-size:.75rem;font-weight:600;margin-top:.4rem">Points: <em style="color:var(--gold)">${m.pts.toLocaleString()}</em></div></div>`;
-  }).join('');
-}
-function mf(t,b){mF=t;document.querySelectorAll('#panel-members .fb').forEach(x=>x.classList.remove('active'));b.classList.add('active');rM();}
-function openP(i){
-  openMi=i;const m=M[i];
-  document.getElementById('mav').textContent=ini(m.name);document.getElementById('mav').style.background=TC[m.team];
-  document.getElementById('mdn').textContent=m.name;document.getElementById('mdr').textContent=m.role+' · '+m.team+' Team';
-  document.getElementById('minfo').innerHTML=`<div class="pr"><span>Points</span><span>${m.pts.toLocaleString()} pts</span></div><div class="pr"><span>Team</span><span>${TE[m.team]} ${m.team}</span></div><div class="pr"><span>Student ID</span><span>${m.sid||'—'}</span></div><div class="pr"><span>Phone</span><span>${m.phone||'—'}</span></div>`;
-  document.getElementById('mbio').textContent=m.bio||'No bio yet.';
-  document.getElementById('mach').innerHTML=(m.ach||[]).map(a=>`<span class="ach">${a}</span>`).join('');
-  document.getElementById('pfbio').value=m.bio||'';document.getElementById('pfph').value=m.phone||'';
-  document.getElementById('pef').classList.remove('open');document.getElementById('pmo').classList.add('open');
-}
-function closePM(){document.getElementById('pmo').classList.remove('open');}
-function cmo(e){if(e.target.id==='pmo')closePM();}
-function tgEdit(){document.getElementById('pef').classList.toggle('open');}
-function addAch(){const v=document.getElementById('pfach').value.trim();if(!v||openMi<0)return;M[openMi].ach=M[openMi].ach||[];M[openMi].ach.push(v);document.getElementById('pfach').value='';document.getElementById('mach').innerHTML=M[openMi].ach.map(a=>`<span class="ach">${a}</span>`).join('');}
-function saveP(){if(openMi<0)return;M[openMi].bio=document.getElementById('pfbio').value.trim();M[openMi].phone=document.getElementById('pfph').value.trim();openP(openMi);document.getElementById('pef').classList.remove('open');}
-// ═══ CANDIDATES ═══
-function rCands(){
-  document.getElementById('cgrid').innerHTML=C.map((c,i)=>{
-    const pct=c.total?Math.round(c.votes/c.total*100):0;
-    return `<div class="cnd"><div class="cndh"><div class="av" style="width:42px;height:42px;font-size:.92rem;background:${TC[c.team]}">${ini(c.name)}</div><div><div class="cndn">${c.name}</div><div class="cndp">${c.pos}</div><div class="cndt">${TE[c.team]} ${c.team} Team</div></div></div><div class="bp"><p style="font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:.6rem">${c.bio}</p><div class="vm"><span>${c.votes} votes</span><span>${pct}%</span></div><div class="vb"><div class="vbf" style="width:${pct}%;background:${TC[c.team]}"></div></div><button class="bvote${voted[i]?' voted':''}" onclick="castV(${i})" ${voted[i]?'disabled':''}>${voted[i]?'✓ Voted':'Vote for '+c.name.split(' ')[0]}</button></div></div>`;
-  }).join('');
-}
-function castV(i){if(voted[i])return;voted[i]=true;C[i].votes++;rCands();upStats();}
-// ═══ EVENTS ═══
-function rEvents(){
-  const el=document.getElementById('elist');
-  if(!E.length){el.innerHTML='<div style="text-align:center;padding:2.5rem;background:var(--white);border:1px solid var(--border);border-radius:14px;color:var(--muted)"><div style="font-size:2.5rem;margin-bottom:.6rem">📅</div><div style="font-weight:600;margin-bottom:.3rem">No events yet</div><div style="font-size:.82rem">Add events from the Admin panel</div></div>';return;}
-  el.innerHTML=E.map(e=>`<div class="ev"><div class="evd"><div class="evday">${e.day}</div><div class="evmon">${e.mon}</div></div><div><div class="evt">${e.title}</div><div class="evm">${e.meta}</div></div><span class="etag t${e.status[0]}">${e.status==='today'?'Today':e.status==='upcoming'?'Upcoming':'Past'}</span></div>`).join('');
-}
-// ═══ CHAT ═══
-function rChat(){
-  const box=document.getElementById('cbox');
-  const msgs=chatMsgs[chatCh]||[];
-  box.innerHTML=msgs.length?msgs.map(m=>`<div class="cmsg"><div class="av" style="width:27px;height:27px;font-size:.63rem;background:${TC[m.team]||'#6B7280'}">${ini(m.from)}</div><div><div class="cmeta"><strong>${m.from}</strong> · ${TE[m.team]||''} ${m.team||''} · ${m.time}</div><div class="cbub">${m.text}</div></div></div>`).join(''):'<div style="text-align:center;padding:2rem;color:var(--muted)"><div style="font-size:2rem;margin-bottom:.5rem">💬</div><div style="font-size:.82rem">No messages yet — be the first to say hi! 👋</div></div>';
-  box.scrollTop=box.scrollHeight;
-  const sel=document.getElementById('csel');const cur=sel.value;
-  sel.innerHTML='<option value="">Select name…</option>'+M.map(m=>`<option value="${m.name}">${m.name}</option>`).join('');
-  if(cur)sel.value=cur;
-}
-function swC(ch,b){chatCh=ch;document.querySelectorAll('.cbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');rChat();}
-function sendChat(){
-  const a=document.getElementById('csel').value,t=document.getElementById('cinp').value.trim();
-  if(!a||!t)return;const mb=M.find(m=>m.name===a);const now=new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  if(!chatMsgs[chatCh])chatMsgs[chatCh]=[];chatMsgs[chatCh].push({from:a,team:mb?.team||'',text:t,time:now});
-  document.getElementById('cinp').value='';rChat();
-}
-// ═══ GALLERY ═══
-const GE=['🏆','📖','🎉','🌟','⚽','🏅','📸','🎓','🌈','🎨'];
-function rGallery(){
-  const filtered = galSectionFilter==='All' ? G : G.filter(g=>g.section===galSectionFilter);
-  const grid = document.getElementById('ggrid');
-  if(!filtered.length){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2.5rem;background:var(--white);border:1px dashed var(--border);border-radius:14px;color:var(--muted)"><div style="font-size:2.5rem;margin-bottom:.5rem">'+(galSectionFilter==='All'?'🖼':'📁')+'</div><div style="font-weight:600;margin-bottom:.3rem">No photos in this section yet</div><div style="font-size:.8rem">Upload photos or add with caption above</div></div>';
+let user = null;
+
+function login(){
+  const email = document.getElementById('email').value;
+  const pwd = document.getElementById('password').value;
+  const u = db.users.find(x=>x.email===email && x.password===pwd);
+  if(!u){
+    document.getElementById('loginError').textContent='❌ Invalid email/password';
+    document.getElementById('loginError').classList.add('show');
     return;
   }
-  grid.innerHTML=filtered.map((g,gi)=>{
-    const i=G.indexOf(g);
-  const thumb=g.img
-    ?`<img src="${g.img}" style="width:100%;height:100%;object-fit:cover;">`
-    :`<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;background:linear-gradient(135deg,#f3f0ff,#ede9fe)"><span style="font-size:3rem">${g.emoji}</span></div>`;
-  const secTag=g.section?`<span style="font-size:.6rem;font-weight:700;padding:.12rem .45rem;border-radius:20px;background:#EDE9FE;color:#7C3AED;margin-top:.22rem;display:inline-block">${g.emoji} ${g.section}</span>`:''; 
-  return `<div class="gi" style="position:relative"><div class="gt" style="overflow:hidden;background:#f3f0ff">${thumb}</div><div class="gc" style="border-top:2px solid var(--gold)">${g.cap}<span>${g.sub}</span>${secTag}</div><button onclick="delGal(${i2})" title="Delete photo" style="position:absolute;top:.4rem;right:.4rem;background:rgba(124,58,237,.85);border:none;color:#fff;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center;font-weight:700">✕</button></div>`;
-}).join('');
-  if(!gList.length) document.getElementById('ggrid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--muted)"><div style="font-size:2.5rem">📷</div><p style="margin-top:.5rem">No photos in this category yet</p></div>';
+  user = u;
+  localStorage.setItem('user',JSON.stringify(u));
+  enter();
 }
-function delGal(i){if(confirm('Remove this photo?')){G.splice(i,1);rGallery();}}
-const SEC_EMOJI={'Graduation':'🎓','Study':'📚','Winners':'🏆','Party':'🎉','Sports':'⚽','Arts':'🌟','Other':'📌'};
-let pendingUploadFiles=null;
-function openCaptionForm(){
-  pendingUploadFiles=null;
-  document.getElementById('gal-form-title').textContent='✏️ Add Photo with Caption';
-  document.getElementById('gal-form-cap').value='';
-  document.getElementById('gal-form-sub').value='';
-  document.getElementById('gal-form-sec').value='Graduation';
-  document.getElementById('gal-form-filehint').style.display='none';
-  document.getElementById('gal-form-overlay').classList.add('open');
-}
-function triggerUpload(){document.getElementById('galfile').click();}
-function handleGalUpload(input){
-  const files=Array.from(input.files);
-  if(!files.length)return;
-  pendingUploadFiles=files;
-  document.getElementById('gal-form-title').textContent=`🖼 ${files.length} Photo${files.length>1?'s':''} Selected`;
-  document.getElementById('gal-form-cap').value=files[0].name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ');
-  document.getElementById('gal-form-sub').value='';
-  document.getElementById('gal-form-sec').value='Graduation';
-  document.getElementById('gal-form-filehint').style.display=files.length>1?'block':'none';
-  document.getElementById('gal-form-overlay').classList.add('open');
-  input.value='';
-}
-function closeGalForm(){document.getElementById('gal-form-overlay').classList.remove('open');pendingUploadFiles=null;}
-function submitGalForm(){
-  const cap=document.getElementById('gal-form-cap').value.trim();
-  const sub=document.getElementById('gal-form-sub').value.trim();
-  const section=document.getElementById('gal-form-sec').value;
-  if(!cap){alert('Please enter a caption.');return;}
-  const finalSub=sub||(section+' · NAJAH 2025–2026');
-  if(pendingUploadFiles&&pendingUploadFiles.length){
-    pendingUploadFiles.forEach((file,idx)=>{
-      const reader=new FileReader();
-      reader.onload=e=>{
-        const thisCap=pendingUploadFiles.length>1?`${cap} ${idx+1}`:cap;
-        G.unshift({emoji:SEC_EMOJI[section],cap:thisCap,sub:finalSub,section,img:e.target.result});
-        rGallery();
-      };
-      reader.readAsDataURL(file);
-    });
-  }else{
-    G.unshift({emoji:SEC_EMOJI[section],cap,sub:finalSub,section,img:null});
-    rGallery();
+
+function signup(){
+  const email = prompt('Email:');
+  const pwd = prompt('Password:');
+  const name = prompt('Name:');
+  if(!email||!pwd||!name)return;
+  if(db.users.find(x=>x.email===email)){
+    alert('Email exists');
+    return;
   }
-  closeGalForm();
+  const newU = {id:db.users.length+1,email,password:pwd,name};
+  db.users.push(newU);
+  user = newU;
+  localStorage.setItem('user',JSON.stringify(newU));
+  enter();
 }
-function addGal(){openCaptionForm();}
-// ═══ ARTS FEST ═══
-function rAFP(){
-  const list=afCF==='All'?AFP:AFP.filter(p=>p.cat===afCF);
-  document.getElementById('afpg').innerHTML=list.map(p=>{
-    const i=AFP.indexOf(p);const tot=p.sc.c+p.sc.s+p.sc.p;
-    return `<div class="afpc"><div class="afph"><div class="afpa">${ini(p.name)}</div><div class="afpn">${p.name}</div><div class="afpc2">${CE[p.cat]||'🎭'} ${p.cat}</div></div><div class="bp"><p style="font-size:.76rem;color:var(--muted);line-height:1.5;margin-bottom:.5rem">${p.bio}</p><div style="display:flex;justify-content:space-between;font-size:.76rem;margin-bottom:.32rem"><span class="badge b${p.team[0].toLowerCase()}">${TE[p.team]} ${p.team}</span><span style="font-family:'Syne',sans-serif;font-weight:800;color:var(--pur)">${tot>0?'Score: '+tot:'Pending'}</span></div><button class="afvb${afVoted[i]?' voted':''}" onclick="afV(${i})" ${afVoted[i]?'disabled':''}>${afVoted[i]?'✓ Voted':'👏 Vote'}</button></div></div>`;
-  }).join('')||'<p style="color:var(--muted);font-size:.83rem">No participants in this category yet.</p>';
-  upStats();
+
+function enter(){
+  document.getElementById('loginScreen').classList.add('hidden');
+  document.getElementById('app').classList.add('show');
+  document.getElementById('userDisplay').textContent=`Hi, ${user.name}!`;
+  render();
 }
-function afC(c,b){afCF=c;document.querySelectorAll('.afcb').forEach(x=>x.classList.remove('active'));b.classList.add('active');rAFP();}
-function afV(i){if(afVoted[i])return;afVoted[i]=true;rAFP();}
-function rAFS(){document.getElementById('afsl').innerHTML=AFS.map(s=>`<div class="afsc"><div class="aftm">${s.time}</div><div><div class="afst2">${s.title}</div><div class="afsm">👤 ${s.performer}</div></div><span class="afstag">${CE[s.cat]||'🎭'} ${s.cat}</span></div>`).join('');}
-function rAFG(){document.getElementById('afgg').innerHTML=AFG.map(g=>`<div class="gi"><div class="gt" style="background:linear-gradient(135deg,var(--purl),#ede9fe)">${g.emoji}</div><div class="gc">${g.cap}<span style="color:var(--pur)">${g.sub}</span></div></div>`).join('');}
-function rAFJ(){
-  document.getElementById('afjg').innerHTML=AFJ.map(j=>`<div class="jc"><div class="jav">${ini(j.name)}</div><div><div class="jn">${j.name}</div><div class="js2">${j.spec}</div></div></div>`).join('');
-  document.getElementById('afsc2').innerHTML=AFP.map((p,i)=>{const t=p.sc.c+p.sc.s+p.sc.p;return `<div class="scr"><span>${CE[p.cat]||''} ${p.cat}</span><span style="font-weight:600">${p.name}</span><input class="sci" type="number" min="0" max="10" value="${p.sc.c}" oninput="setSc(${i},'c',this.value)"><input class="sci" type="number" min="0" max="10" value="${p.sc.s}" oninput="setSc(${i},'s',this.value)"><input class="sci" type="number" min="0" max="10" value="${p.sc.p}" oninput="setSc(${i},'p',this.value)"><span class="aftot" id="aft${i}">${t}</span></div>`;}).join('');
+
+function logout(){
+  user = null;
+  localStorage.removeItem('user');
+  location.reload();
 }
-function setSc(i,f,v){AFP[i].sc[f]=Math.min(10,Math.max(0,parseInt(v)||0));const t=AFP[i].sc.c+AFP[i].sc.s+AFP[i].sc.p;document.getElementById('aft'+i).textContent=t;rAFP();}
-function afReg(){
-  const n=document.getElementById('afn').value.trim(),cat=document.getElementById('afc').value,team=document.getElementById('aft').value,bio=document.getElementById('afb').value.trim()||'Participating in Nujoom-ul-Funoon.';
-  const msg=document.getElementById('afmsg');if(!n){msg.style.color='var(--bad)';msg.textContent='Please enter your name.';return;}
-  AFP.push({name:n,cat,team,bio,sc:{c:0,s:0,p:0}});AFG.unshift({emoji:CE[cat]||'🎭',cap:n,sub:`${n} · ${cat}`});
-  ['afn','afb'].forEach(id=>document.getElementById(id).value='');
-  msg.style.color='var(--ok)';msg.textContent=`✨ ${n} registered for ${CE[cat]} ${cat}!`;
-  renderAll();setTimeout(()=>msg.textContent='',4000);
-}
-function afTab(id,b){document.querySelectorAll('#panel-arts .sp2').forEach(x=>x.classList.remove('on'));document.querySelectorAll('#panel-arts .stab').forEach(x=>{x.classList.remove('af');if(!x.classList.contains('sp'))x.style.background='';x.style.color='';x.classList.remove('sp')});document.getElementById(id).classList.add('on');b.classList.add('af');if(id==='afj2')rAFJ();}
-// ═══ SPORTS ═══
-function rMatches(){
-  const list=spSF==='All'?SPM:SPM.filter(m=>m.sport===spSF);
-  document.getElementById('spml').innerHTML=list.map((m,i)=>{
-    const ri2=SPM.indexOf(m);
-    return `<div class="mc2"><div class="mts"><div class="mt"><div class="av" style="width:38px;height:38px;font-size:.85rem;background:${TC[m.t1]};margin:0 auto .3rem">${TE[m.t1]}</div><div class="mtn" style="color:${TC[m.t1]}">${m.t1}</div></div><div style="text-align:center"><div class="msco"><input type="number" value="${m.s1}" min="0" oninput="updSc(${ri2},'s1',this.value)"><span class="vsd">vs</span><input type="number" value="${m.s2}" min="0" oninput="updSc(${ri2},'s2',this.value)"></div><span class="mstag m${m.status==='live'?'live':m.status==='done'?'do':'up'}">${m.status==='live'?'🟣 LIVE':m.status==='done'?'✓ Done':'Upcoming'}</span></div><div class="mt"><div class="av" style="width:38px;height:38px;font-size:.85rem;background:${TC[m.t2]};margin:0 auto .3rem">${TE[m.t2]}</div><div class="mtn" style="color:${TC[m.t2]}">${m.t2}</div></div></div><div class="mmeta">${SE[m.sport]||'🏟'} ${m.sport} · 📅 ${m.date}</div></div>`;
-  }).join('')||'<p style="color:var(--muted);font-size:.83rem">No matches in this sport yet.</p>';
-  upStats();
-}
-function updSc(i,f,v){SPM[i][f]=Math.max(0,parseInt(v)||0);}
-function spSp(s,b){spSF=s;document.querySelectorAll('.sptb').forEach(x=>x.classList.remove('active'));b.classList.add('active');rMatches();}
-function rStandings(){
-  const sc={Red:{w:0,d:0,l:0,gf:0},Blue:{w:0,d:0,l:0,gf:0},Green:{w:0,d:0,l:0,gf:0}};
-  SPM.filter(m=>m.status==='done').forEach(m=>{sc[m.t1].gf+=m.s1;sc[m.t2].gf+=m.s2;if(m.s1>m.s2){sc[m.t1].w++;sc[m.t2].l++;}else if(m.s1<m.s2){sc[m.t2].w++;sc[m.t1].l++;}else{sc[m.t1].d++;sc[m.t2].d++;}});
-  const rows=['Red','Blue','Green'].map(t=>({t,w:sc[t].w,d:sc[t].d,l:sc[t].l,gf:sc[t].gf,pts:sc[t].w*3+sc[t].d})).sort((a,b)=>b.pts-a.pts);
-  document.getElementById('spstb').innerHTML=rows.map((r,i)=>`<div class="spr"><span>${i+1}</span><span><span class="dot" style="background:${TC[r.t]}"></span>${r.t}</span><span style="text-align:center">${r.w}</span><span style="text-align:center">${r.d}</span><span style="text-align:center">${r.l}</span><span style="text-align:center">${r.gf}</span><span class="sppts">${r.pts}</span></div>`).join('');
-}
-function rAthletes(){document.getElementById('spatg').innerHTML=SPA.map(a=>`<div class="mc"><div class="av" style="width:48px;height:48px;font-size:.97rem;background:${TC[a.team]};margin:0 auto">${ini(a.name)}</div><div class="mcn">${a.name}</div><div class="mcr">${SE[a.sport]||'🏅'} ${a.sport}</div><span class="badge b${a.team[0].toLowerCase()}">${TE[a.team]} ${a.team}</span></div>`).join('');}
-function spReg(){
-  const n=document.getElementById('spn').value.trim(),sport=document.getElementById('sps').value,team=document.getElementById('spt').value;
-  const msg=document.getElementById('spmsg');if(!n){msg.style.color='var(--bad)';msg.textContent='Please enter your name.';return;}
-  SPA.push({name:n,sport,team});document.getElementById('spn').value='';
-  msg.style.color='var(--ok)';msg.textContent=`🏅 ${n} registered for ${SE[sport]} ${sport}!`;
-  renderAll();setTimeout(()=>msg.textContent='',4000);
-}
-function spTab(id,b){document.querySelectorAll('#panel-sports .sp2').forEach(x=>x.classList.remove('on'));document.querySelectorAll('#panel-sports .stab').forEach(x=>{x.classList.remove('sp');x.style.background='';x.style.color='';x.classList.remove('af')});document.getElementById(id).classList.add('on');b.classList.add('sp');if(id==='spst2')rStandings();if(id==='spat2')rAthletes();}
-// ═══ SETTINGS ═══
-function togDark(el){document.body.classList.toggle('dark',el.checked);}
-function setLang(l,b){document.querySelectorAll('.lbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(l==='ar'){document.documentElement.setAttribute('dir','rtl');document.getElementById('heyebrow').textContent='اتحاد الفصل — العام الدراسي ٢٠٢٤–٢٥';document.getElementById('hsub').textContent='تتبّع النقاط، تواصل مع زملائك، صوّت للقادة، واحتفل بالمواهب';}else{document.documentElement.setAttribute('dir','ltr');document.getElementById('heyebrow').textContent='Class Union — Academic Year '+cfg.year;document.getElementById('hsub').textContent='Track points, connect with teammates, vote for leaders, and celebrate talents.';}}
-function saveCInfo(){cfg.name=document.getElementById('scn').value.trim()||'NAJAH';cfg.year=document.getElementById('syr').value.trim()||'2025–2026';cfg.prog=document.getElementById('spg').value.trim();document.getElementById('htitle').textContent=cfg.name;document.getElementById('heyebrow').textContent='Class Union — Academic Year '+cfg.year;document.getElementById('fname').textContent=cfg.name+' Class Union';document.getElementById('fyr').textContent=cfg.year;alert('Class info saved! ✅');}
-function saveTNames(){cfg.teams[0]=document.getElementById('st1').value.trim()||'Red';cfg.teams[1]=document.getElementById('st2').value.trim()||'Blue';cfg.teams[2]=document.getElementById('st3').value.trim()||'Green';renderAll();alert('Team names saved! ✅');}
-function changePW(){
-  const cur=document.getElementById('scur').value,nw=document.getElementById('snew').value,cf=document.getElementById('scf').value;
-  const msg=document.getElementById('pwmsg');
-  if(cur!==PW){msg.style.color='var(--bad)';msg.textContent='❌ Current password is incorrect.';return;}
-  if(nw.length<4){msg.style.color='var(--bad)';msg.textContent='❌ New password too short (min 4 chars).';return;}
-  if(nw!==cf){msg.style.color='var(--bad)';msg.textContent='❌ Passwords do not match.';return;}
-  PW=nw;['scur','snew','scf'].forEach(id=>document.getElementById(id).value='');
-  msg.style.color='var(--ok)';msg.textContent='✅ Password changed successfully!';setTimeout(()=>msg.textContent='',4000);
-}
-// ═══ ADMIN ═══
-function tryUnlock(){
-  const inp=document.getElementById('apw'),err=document.getElementById('lerr');
-  if(inp.value===PW){unlocked=true;document.getElementById('alo').style.display='none';err.textContent='';inp.value='';}
-  else{inp.classList.add('err');err.textContent='Incorrect password. Try again.';inp.value='';setTimeout(()=>inp.classList.remove('err'),400);}
-}
-function lockAdmin(){unlocked=false;document.getElementById('alo').style.display='flex';document.getElementById('apw').value='';document.getElementById('lerr').textContent='';}
-function aAddM(){
-  const n=document.getElementById('amn').value.trim(),r=document.getElementById('amr').value.trim()||'Member',t=document.getElementById('amt').value,p=parseInt(document.getElementById('amp').value)||0;
-  if(!n)return alert('Name required');M.push({name:n,role:r,team:t,pts:p,bio:'',phone:'',ach:[]});['amn','amr','amp'].forEach(id=>document.getElementById(id).value='');renderAll();
-}
-function aDelM(i){M.splice(i,1);renderAll();}
-function aAddC(){
-  const n=document.getElementById('acn').value.trim(),p=document.getElementById('acp').value.trim(),b=document.getElementById('acb').value.trim()||'Running for the class.',t=document.getElementById('act').value;
-  if(!n||!p)return alert('Name and position required');C.push({name:n,pos:p,team:t,bio:b,votes:0,total:M.length});['acn','acp','acb'].forEach(id=>document.getElementById(id).value='');renderAll();
-}
-function aDelC(i){C.splice(i,1);renderAll();}
-function aAddE(){
-  const t=document.getElementById('aet').value.trim(),m=document.getElementById('aem').value.trim(),d=document.getElementById('aed').value.trim(),mo=document.getElementById('aemo').value.trim(),s=document.getElementById('aes').value;
-  if(!t||!d||!mo)return alert('Title, day and month required');E.unshift({day:d,mon:mo,title:t,meta:m||'TBD',status:s});['aet','aem','aed','aemo'].forEach(id=>document.getElementById(id).value='');renderAll();
-}
-function aDelE(i){E.splice(i,1);renderAll();}
-function aAddAF(){
-  const n=document.getElementById('aafn').value.trim(),c=document.getElementById('aafc').value,t=document.getElementById('aaft').value;
-  if(!n)return alert('Name required');AFP.push({name:n,cat:c,team:t,bio:'Arts Fest participant.',sc:{c:0,s:0,p:0}});document.getElementById('aafn').value='';renderAll();
-}
-function aDelAF(i){AFP.splice(i,1);renderAll();}
-function aAddMatch(){
-  const t1=document.getElementById('amt1').value,t2=document.getElementById('amt2').value,s=document.getElementById('ams').value,st=document.getElementById('amst').value,d=document.getElementById('amd').value.trim()||'TBD';
-  if(t1===t2)return alert('Teams must be different');SPM.push({sport:s,t1,t2,s1:0,s2:0,status:st,date:d});document.getElementById('amd').value='';renderAll();
-}
-function aDelMatch(i){SPM.splice(i,1);renderAll();}
-function aAddGal(){
-  const c=document.getElementById('agc').value.trim(),s=document.getElementById('ags').value.trim(),e=document.getElementById('age').value;
-  if(!c)return alert('Caption required');G.unshift({emoji:e,cap:c,sub:s||'NAJAH 2025'});['agc','ags'].forEach(id=>document.getElementById(id).value='');rGallery();
-}
-function savePts(i){const v=parseInt(document.getElementById('pi'+i).value);if(!isNaN(v)&&v>=0){M[i].pts=v;renderAll();}}
-function rAdminLists(){
-  populateAFPtsSelect();populateSPPtsSelect();
-  document.getElementById('alm').innerHTML=M.map((m,i)=>`<div class="ai2"><span>${m.name} · ${TE[m.team]} · ${m.pts}pts</span><button class="bdel" onclick="aDelM(${i})">🗑</button></div>`).join('');
-  document.getElementById('ptsl').innerHTML=M.map((m,i)=>`<div class="ptsi"><div class="av" style="width:24px;height:24px;font-size:.6rem;background:${TC[m.team]}">${ini(m.name)}</div><span class="ptsn">${m.name}</span><input class="ptsin" id="pi${i}" type="number" value="${m.pts}" min="0"><button class="bptsv" onclick="savePts(${i})">Save</button></div>`).join('');
-  document.getElementById('alc').innerHTML=C.map((c,i)=>`<div class="ai2"><span>${c.name} · ${c.pos}</span><button class="bdel" onclick="aDelC(${i})">🗑</button></div>`).join('');
-  document.getElementById('ale').innerHTML=E.map((e,i)=>`<div class="ai2"><span>${e.day} ${e.mon} · ${e.title}</span><button class="bdel" onclick="aDelE(${i})">🗑</button></div>`).join('');
-  document.getElementById('alaf').innerHTML=AFP.map((p,i)=>`<div class="ai2"><span>${CE[p.cat]||''} ${p.name}</span><button class="bdel" onclick="aDelAF(${i})">🗑</button></div>`).join('');
-  document.getElementById('almat').innerHTML=SPM.map((m,i)=>`<div class="ai2"><span>${SE[m.sport]||''} ${m.t1} vs ${m.t2}</span><button class="bdel" onclick="aDelMatch(${i})">🗑</button></div>`).join('');
-}
-function exportData(){const d=JSON.stringify({members:M,candidates:C,events:E,afParticipants:AFP,spMatches:SPM,spAthletes:SPA},null,2);const a=document.createElement('a');a.href='data:application/json;charset=utf-8,'+encodeURIComponent(d);a.download='najah-data.json';a.click();}
-function resetVotes(){if(confirm('Reset ALL votes? This cannot be undone.')){Object.keys(voted).forEach(k=>delete voted[k]);Object.keys(afVoted).forEach(k=>delete afVoted[k]);C.forEach(c=>c.votes=0);renderAll();alert('All votes reset.');}}
-// ═══ NAVIGATION ═══
-function go(id,el){
+
+function switchTab(tab){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tb,.nl a').forEach(b=>b.classList.remove('active'));
-  document.getElementById('panel-'+id).classList.add('active');
-  if(el)el.classList.add('active');
-  if(id==='chat')rChat();
-  if(id==='admin'&&!unlocked)document.getElementById('alo').style.display='flex';
-}
-function toggleNav(){document.getElementById('nl').classList.toggle('open');document.getElementById('hbg').classList.toggle('open');}
-function cn(){document.getElementById('nl').classList.remove('open');document.getElementById('hbg').classList.remove('open');}
-// ═══ POINTS SETTINGS ═══
-let ptsRules={ev:10,vt:5,af:20,afw:50,spw:30,spd:10,nm:15};
-function savePtsSettings(){
-  ptsRules.ev=parseInt(document.getElementById('pset-ev').value)||10;
-  ptsRules.vt=parseInt(document.getElementById('pset-vt').value)||5;
-  ptsRules.af=parseInt(document.getElementById('pset-af').value)||20;
-  ptsRules.afw=parseInt(document.getElementById('pset-afw').value)||50;
-  ptsRules.spw=parseInt(document.getElementById('pset-spw').value)||30;
-  ptsRules.spd=parseInt(document.getElementById('pset-spd').value)||10;
-  ptsRules.nm=parseInt(document.getElementById('pset-nm').value)||15;
-  // sync to settings panel
-  ['sep','svp','sap','ssp'].forEach((id,i)=>{const v=[ptsRules.ev,ptsRules.vt,ptsRules.af,ptsRules.spw][i];const el=document.getElementById(id);if(el)el.value=v;});
-  const msg=document.getElementById('pts-set-msg');
-  msg.style.color='var(--ok)';msg.textContent='✅ Points rules saved!';setTimeout(()=>msg.textContent='',3000);
-}
-function populateAFPtsSelect(){
-  const sel=document.getElementById('afpts-member');
-  if(!sel)return;const cur=sel.value;
-  sel.innerHTML=AFP.map(p=>`<option value="${p.name}">${p.name} (${p.cat})</option>`).join('');
-  if(cur)sel.value=cur;
-}
-function populateSPPtsSelect(){
-  const sel=document.getElementById('sppts-member');
-  if(!sel)return;const cur=sel.value;
-  sel.innerHTML=SPA.map(a=>`<option value="${a.name}">${a.name} (${a.sport})</option>`).join('');
-  if(cur)sel.value=cur;
-}
-function awardAFPoints(){
-  const name=document.getElementById('afpts-member').value;
-  const val=parseInt(document.getElementById('afpts-val').value)||ptsRules.af;
-  const reason=document.getElementById('afpts-reason').value;
-  const msg=document.getElementById('afpts-msg');
-  const mbr=M.find(m=>m.name===name);
-  if(!mbr){msg.style.color='var(--bad)';msg.textContent='Member not found in main list.';return;}
-  mbr.pts+=val;
-  mbr.ach=mbr.ach||[];mbr.ach.push(`🌟 Arts Fest: ${reason}`);
-  msg.style.color='var(--ok)';msg.textContent=`✅ +${val} pts awarded to ${name} for ${reason}!`;
-  document.getElementById('afpts-val').value='';
-  renderAll();setTimeout(()=>msg.textContent='',4000);
-}
-function awardSPPoints(){
-  const name=document.getElementById('sppts-member').value;
-  const val=parseInt(document.getElementById('sppts-val').value)||ptsRules.spw;
-  const reason=document.getElementById('sppts-reason').value;
-  const msg=document.getElementById('sppts-msg');
-  const mbr=M.find(m=>m.name===name);
-  if(!mbr){msg.style.color='var(--bad)';msg.textContent='Member not found in main list.';return;}
-  mbr.pts+=val;
-  mbr.ach=mbr.ach||[];mbr.ach.push(`⚽ Sports: ${reason}`);
-  msg.style.color='var(--ok)';msg.textContent=`✅ +${val} pts awarded to ${name} for ${reason}!`;
-  document.getElementById('sppts-val').value='';
-  renderAll();setTimeout(()=>msg.textContent='',4000);
+  document.getElementById(tab).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
 }
 
-// ═══ REGISTRATION SYSTEM ═══
-let pendingRegs = [];
+function updateTeamCount(){
+  const n = parseInt(document.getElementById('teamCount').value);
+  while(db.teams.length<n)db.teams.push({id:db.teams.length+1,name:`Team ${db.teams.length+1}`,color:'#'+Math.random().toString(16).slice(2,8)});
+  db.teams = db.teams.slice(0,n);
+  renderTeamEditor();
+}
 
-function submitReg() {
-  const name  = document.getElementById('rg-name').value.trim();
-  const sid   = document.getElementById('rg-id').value.trim();
-  const phone = document.getElementById('rg-phone').value.trim();
-  const team  = document.getElementById('rg-team').value;
-  const role  = document.getElementById('rg-role').value.trim() || 'Member';
-  const bio   = document.getElementById('rg-bio').value.trim() || '';
-  const msg   = document.getElementById('reg-msg');
+function renderTeamEditor(){
+  const html = db.teams.map((t,i)=>`
+    <div class="team-editor-card">
+      <input type="text" value="${t.name}" onchange="db.teams[${i}].name=this.value;render()">
+      <input type="color" value="${t.color}" onchange="db.teams[${i}].color=this.value;render()">
+    </div>
+  `).join('');
+  document.getElementById('teamEditor').innerHTML = html;
+}
 
-  if (!name)  { showRegMsg('err','❌ Please enter your full name.'); return; }
-  if (!sid)   { showRegMsg('err','❌ Please enter your Student ID.'); return; }
-  if (!phone) { showRegMsg('err','❌ Please enter your phone number.'); return; }
-  if (!team)  { showRegMsg('err','❌ Please select your team.'); return; }
+function saveTeams(){
+  const msg = document.getElementById('teamMsg');
+  msg.textContent = `✅ Saved ${db.teams.length} teams!`;
+  msg.classList.add('show','success');
+  render();
+  setTimeout(()=>msg.classList.remove('show'),3000);
+}
 
-  // Check duplicate
-  if (M.find(m => m.name.toLowerCase() === name.toLowerCase())) {
-    showRegMsg('err','❌ A member with this name already exists.'); return;
+function resetTeams(){
+  db.teams = [
+    {id:1,name:'Phoenix',color:'#FF6B6B'},
+    {id:2,name:'Falcon',color:'#4ECDC4'},
+    {id:3,name:'Warriors',color:'#FFE66D'}
+  ];
+  document.getElementById('teamCount').value = 3;
+  updateTeamCount();
+}
+
+function addMember(){
+  const name = document.getElementById('newName').value;
+  const points = parseInt(document.getElementById('newPoints').value)||0;
+  const team = parseInt(document.getElementById('newTeam').value);
+  if(!name)return alert('Name required');
+  db.members.push({id:db.members.length+1,name,team,points});
+  document.getElementById('newName').value='';
+  document.getElementById('newPoints').value='0';
+  const msg = document.getElementById('memberMsg');
+  msg.textContent=`✅ Added ${name}!`;
+  msg.classList.add('show','success');
+  render();
+  setTimeout(()=>msg.classList.remove('show'),3000);
+}
+
+function render(){
+  renderTeams();
+  renderLeaderboard();
+  renderMembers();
+  renderTeamEditor();
+  updateTeamDropdown();
+}
+
+function renderTeams(){
+  const html = db.teams.map(t=>{
+    const pts = db.members.filter(m=>m.team===t.id).reduce((s,m)=>s+m.points,0);
+    return `<div class="team-card" style="background:${t.color}!important">${t.name}<br>${pts} pts</div>`;
+  }).join('');
+  document.getElementById('teamDisplay').innerHTML = html;
+}
+
+function renderLeaderboard(){
+  const sorted = [...db.members].sort((a,b)=>b.points-a.points);
+  const html = sorted.map((m,i)=>{
+    const t = db.teams.find(x=>x.id===m.team);
+    return `<div class="lb-row"><div class="lb-rank">#${i+1}</div><div class="lb-name">${m.name} (${t.name})</div><div class="lb-points">${m.points}</div></div>`;
+  }).join('');
+  document.getElementById('leaderboard').innerHTML = html;
+}
+
+function renderMembers(){
+  const html = db.members.map(m=>{
+    const t = db.teams.find(x=>x.id===m.team);
+    return `<div class="lb-row"><div><strong>${m.name}</strong><br><span style="color:var(--muted)">${t.name}</span></div><div class="lb-points">${m.points} pts</div></div>`;
+  }).join('');
+  document.getElementById('memberList').innerHTML = html;
+}
+
+function updateTeamDropdown(){
+  const html = db.teams.map(t=>`<option value="${t.id}">${t.name}</option>`).join('');
+  document.getElementById('newTeam').innerHTML = html;
+}
+
+window.addEventListener('load',()=>{
+  const saved = localStorage.getItem('user');
+  if(saved){
+    user = JSON.parse(saved);
+    enter();
   }
-  if (pendingRegs.find(r => r.name.toLowerCase() === name.toLowerCase())) {
-    showRegMsg('err','⏳ You already have a pending registration.'); return;
-  }
-
-  pendingRegs.push({ name, sid, phone, team, role, bio, submittedAt: new Date().toLocaleString() });
-  showRegMsg('ok', '✅ Registration submitted! The admin will review it shortly.');
-  ['rg-name','rg-id','rg-phone','rg-role','rg-bio'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('rg-team').value = '';
-  renderAll();
-}
-
-function showRegMsg(type, text) {
-  const el = document.getElementById('reg-msg');
-  el.className = 'reg-msg ' + type;
-  el.textContent = text;
-  if (type === 'ok') setTimeout(() => el.className = 'reg-msg', 5000);
-}
-
-function approveReg(i) {
-  const r = pendingRegs[i];
-  M.push({ name: r.name, role: r.role, team: r.team, pts: 0, bio: r.bio, phone: r.phone, sid: r.sid, ach: ['✅ Registered Member'] });
-  pendingRegs.splice(i, 1);
-  renderAll();
-  alert('✅ ' + r.name + ' has been approved and added to the class!');
-}
-
-function rejectReg(i) {
-  const r = pendingRegs[i];
-  if (confirm('Reject registration for ' + r.name + '?')) {
-    pendingRegs.splice(i, 1);
-    renderAll();
-  }
-}
-
-function rPending() {
-  const el = document.getElementById('pend-list');
-  const cnt = document.getElementById('pend-count');
-  if (!el || !cnt) return;
-  cnt.textContent = pendingRegs.length + ' waiting';
-  cnt.style.background = pendingRegs.length > 0 ? 'rgba(239,68,68,.15)' : 'rgba(201,168,76,.18)';
-  cnt.style.color = pendingRegs.length > 0 ? 'var(--bad)' : '#9A7010';
-  if (!pendingRegs.length) {
-    el.innerHTML = '<div class="empty-pend">✅ No pending registrations</div>';
-    return;
-  }
-  el.innerHTML = pendingRegs.map((r, i) => `
-    <div class="pend-card">
-      <div class="pend-av" style="background:${TC[r.team]||'#6B7280'}">${ini(r.name)}</div>
-      <div>
-        <div class="pend-name">${r.name}</div>
-        <div class="pend-meta">🆔 ${r.sid} · 📞 ${r.phone} · ${TE[r.team]||''} ${r.team} · ${r.role}</div>
-        <div class="pend-meta" style="margin-top:.18rem">🕐 ${r.submittedAt}</div>
-        ${r.bio ? `<div class="pend-meta" style="margin-top:.18rem;font-style:italic">"${r.bio}"</div>` : ''}
-      </div>
-      <div class="pend-actions">
-        <button class="btn-approve" onclick="approveReg(${i})">✅ Approve</button>
-        <button class="btn-reject" onclick="rejectReg(${i})">❌ Reject</button>
-      </div>
-    </div>`).join('');
-}
-
-// ═══ GALLERY FILTER ═══
-function galFilter(sec,btn){
-  galSectionFilter=sec;
-  document.querySelectorAll('#gal-filter-tabs .fb').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-  rGallery();
-}
-
-// ═══ GALLERY FILTER ═══
-let galF='All';
-function gFilter(f,b){
-  galF=f;
-  document.querySelectorAll('#panel-gallery .fb').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  rGallery();
-}
-// override rGallery to support filter
-const _origRG=rGallery;
-
-// ═══ RENDER ALL ═══
-function renderAll(){rTeams();rLB();rM();rCands();rEvents();rGallery();rAFP();rAFS();rAFG();rMatches();rAdminLists();rPending();upStats();}
-renderAll();
-go('lb',document.querySelector('.tb.active'));
+  updateTeamCount();
+});
 </script>
+
 </body>
 </html>
